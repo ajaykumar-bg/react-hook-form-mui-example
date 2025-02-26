@@ -1,8 +1,109 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import App from '../App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App Component', () => {
+	test('renders the app title', () => {
+		render(<App />);
+		expect(screen.getByText('User Management')).toBeInTheDocument();
+	});
+
+	test('shows initial users', () => {
+		render(<App />);
+		expect(screen.getByText('John Doe')).toBeInTheDocument();
+		expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+	});
+
+	test('opens add user dialog when add button is clicked', async () => {
+		render(<App />);
+
+		// Click the Add User button
+		fireEvent.click(screen.getByText('Add User'));
+
+		// Check that dialog appears with correct title
+		expect(screen.getByText('Add New User')).toBeInTheDocument();
+	});
+
+	test('adds a new user', async () => {
+		render(<App />);
+
+		// Click Add User button
+		fireEvent.click(screen.getByText('Add User'));
+
+		// Fill out the form
+		await userEvent.type(screen.getByLabelText('Name'), 'Test User');
+		await userEvent.type(screen.getByLabelText('Email'), 'test@example.com');
+		await userEvent.type(screen.getByLabelText('Phone'), '1234567890');
+		await userEvent.type(screen.getByLabelText('Role'), 'Tester');
+
+		// Submit the form
+		fireEvent.click(screen.getByText('Add'));
+
+		// Check that the new user appears in the table
+		await waitFor(() => {
+			expect(screen.getByText('Test User')).toBeInTheDocument();
+			expect(screen.getByText('test@example.com')).toBeInTheDocument();
+		});
+	});
+
+	test('edits an existing user', async () => {
+		render(<App />);
+
+		// Find edit button for John Doe and click it
+		const editButtons = screen.getAllByTestId('EditIcon');
+		fireEvent.click(editButtons[0]); // First edit button (John Doe)
+
+		// Check if dialog appears with populated data
+		await waitFor(() => {
+			expect(screen.getByDisplayValue('John Doe')).toBeInTheDocument();
+		});
+
+		// Change the name
+		const nameInput = screen.getByDisplayValue('John Doe');
+		await userEvent.clear(nameInput);
+		await userEvent.type(nameInput, 'John Updated');
+
+		// Submit the form
+		fireEvent.click(screen.getByText('Update'));
+
+		// Check that the updated user appears in the table
+		await waitFor(() => {
+			expect(screen.getByText('John Updated')).toBeInTheDocument();
+		});
+	});
+
+	test('deletes a user', async () => {
+		render(<App />);
+
+		// Initial check
+		expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+
+		// Find delete button for Jane Smith and click it
+		const deleteButtons = screen.getAllByTestId('DeleteIcon');
+		fireEvent.click(deleteButtons[1]); // Second delete button (Jane Smith)
+
+		// Check that Jane Smith is no longer in the document
+		await waitFor(() => {
+			expect(screen.queryByText('Jane Smith')).not.toBeInTheDocument();
+		});
+	});
+
+	test('shows validation errors', async () => {
+		render(<App />);
+
+		// Click Add User button
+		fireEvent.click(screen.getByText('Add User'));
+
+		// Submit the empty form
+		fireEvent.click(screen.getByText('Add'));
+
+		// Check for validation errors
+		await waitFor(() => {
+			expect(screen.getByText('Name is required')).toBeInTheDocument();
+			expect(screen.getByText('Email is required')).toBeInTheDocument();
+			expect(screen.getByText('Phone is required')).toBeInTheDocument();
+			expect(screen.getByText('Role is required')).toBeInTheDocument();
+		});
+	});
 });
