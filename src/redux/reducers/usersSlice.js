@@ -11,39 +11,50 @@ export const usersSlice = createSlice({
 	name: 'users',
 	initialState,
 	reducers: {
-		// Action creators for initiating saga requests
+		// Fetch all users
 		fetchUsersRequest: (state) => {
 			state.loading = true;
 			state.error = null;
 		},
-		createUserRequest: (state, action) => {
-			state.loading = true;
-			state.error = null;
-		},
-		updateUserRequest: (state, action) => {
-			state.loading = true;
-			state.error = null;
-		},
-		deleteUserRequest: (state, action) => {
-			state.loading = true;
-			state.error = null;
-		},
-		selectUserForEdit: (state, action) => {
-			state.selectedUser = action.payload;
-		},
-		clearSelectedUser: (state) => {
-			state.selectedUser = null;
-		},
-
-		// Action creators for saga success responses
 		fetchUsersSuccess: (state, action) => {
 			state.users = action.payload;
 			state.loading = false;
 			state.error = null;
 		},
+		fetchUsersFailure: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+		// Fetch user by ID
+		fetchUserRequest: (state) => {
+			state.loading = true;
+			state.error = null;
+		},
+		fetchUserSuccess: (state, action) => {
+			state.user = action.payload;
+			state.loading = false;
+		},
+		fetchUserFailure: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+		// Create new user
+		createUserRequest: (state, action) => {
+			state.loading = true;
+			state.error = null;
+		},
 		createUserSuccess: (state, action) => {
 			state.users.push(action.payload);
 			state.loading = false;
+			state.error = null;
+		},
+		createUserFailure: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+		// Update exisiting user
+		updateUserRequest: (state, action) => {
+			state.loading = true;
 			state.error = null;
 		},
 		updateUserSuccess: (state, action) => {
@@ -57,10 +68,29 @@ export const usersSlice = createSlice({
 			state.error = null;
 			state.selectedUser = null;
 		},
+		updateUserFailure: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+		// Delete exisiting user
+		deleteUserRequest: (state, action) => {
+			state.loading = true;
+			state.error = null;
+		},
 		deleteUserSuccess: (state, action) => {
 			state.users = state.users.filter((user) => user.id !== action.payload);
 			state.loading = false;
 			state.error = null;
+		},
+		deleteUserFailure: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+		selectUserForEdit: (state, action) => {
+			state.selectedUser = action.payload;
+		},
+		clearSelectedUser: (state) => {
+			state.selectedUser = null;
 		},
 
 		// Action creator for saga failure responses
@@ -73,15 +103,27 @@ export const usersSlice = createSlice({
 
 export const {
 	fetchUsersRequest,
+	fetchUsersSuccess,
+	fetchUsersFailure,
+
+	fetchUserRequest,
+	fetchUserSuccess,
+	fetchUserFailure,
+
 	createUserRequest,
+	createUserSuccess,
+	createUserFailure,
+
 	updateUserRequest,
+	updateUserSuccess,
+	updateUserFailure,
+
 	deleteUserRequest,
+	deleteUserSuccess,
+	deleteUserFailure,
+
 	selectUserForEdit,
 	clearSelectedUser,
-	fetchUsersSuccess,
-	createUserSuccess,
-	updateUserSuccess,
-	deleteUserSuccess,
 	apiFailure,
 } = usersSlice.actions;
 
