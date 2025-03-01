@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Box, Typography, Snackbar, Alert } from '@mui/material';
 import UserTable from './components/UserTable';
 import UserForm from './components/UserForm';
@@ -8,28 +8,23 @@ import { useTranslation } from 'react-i18next';
 // Import i18n initialization
 import './i18n/i18n';
 
-// Initial data
-const initialUsers = [
-	{
-		id: 1,
-		name: 'John Doe',
-		email: 'john@example.com',
-		phone: '1234567890',
-		role: 'Admin',
-	},
-	{
-		id: 2,
-		name: 'Jane Smith',
-		email: 'jane@example.com',
-		phone: '0987654321',
-		role: 'User',
-	},
-];
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchUsersRequest,
+  createUserRequest,
+  updateUserRequest,
+  deleteUserRequest,
+  selectUserForEdit,
+  selectUsers,
+  selectSelectedUser,
+} from './redux/users/usersSlice';
 
 function App() {
-	const [users, setUsers] = useState(initialUsers);
+	// const [users, setUsers] = useState([]);
+	const dispatch = useDispatch();
+	const users = useSelector(selectUsers);
+	const selectedUser = useSelector(selectSelectedUser);
 	const [openDialog, setOpenDialog] = useState(false);
-	const [currentUser, setCurrentUser] = useState(null);
 	const [snackbar, setSnackbar] = useState({
 		open: false,
 		message: '',
@@ -37,39 +32,36 @@ function App() {
 	});
 	const { t } = useTranslation();
 
+	useEffect(() => {
+		dispatch(fetchUsersRequest());
+	  }, [dispatch]);
+
 	// Handle dialog open for create/edit
 	const handleOpenDialog = (user = null) => {
-		setCurrentUser(user);
+		dispatch(selectUserForEdit(user));
 		setOpenDialog(true);
 	};
 
 	// Handle dialog close
 	const handleCloseDialog = () => {
 		setOpenDialog(false);
-		setCurrentUser(null);
+		dispatch(selectUserForEdit(null));
 	};
 
 	// Handle form submission
-	const handleSubmitUser = async (data) => {
+	const handleSubmitUser = async (formData) => {
 		try {
 			// Validate with yup schema (already validated by react-hook-form with yupResolver)
-			if (currentUser) {
+			if (selectedUser) {
 				// Update existing user
-				const updatedUsers = users.map((user) =>
-					user.id === currentUser.id ? { ...user, ...data } : user
-				);
-				setUsers(updatedUsers);
+				dispatch(updateUserRequest({
+					...selectedUser,
+					...formData,
+				}));
 				showNotification(t('notifications.userUpdated'), 'success');
 			} else {
 				// Add new user
-				const newUser = {
-					id:
-						users.length > 0
-							? Math.max(...users.map((user) => user.id)) + 1
-							: 1,
-					...data,
-				};
-				setUsers([...users, newUser]);
+				dispatch(createUserRequest(formData));
 				showNotification(t('notifications.userAdded'), 'success');
 			}
 			handleCloseDialog();
@@ -80,8 +72,9 @@ function App() {
 
 	// Handle user deletion
 	const handleDeleteUser = (id) => {
-		const updatedUsers = users.filter((user) => user.id !== id);
-		setUsers(updatedUsers);
+		if (window.confirm('Are you sure you want to delete this user?')) {
+			dispatch(deleteUserRequest(id));
+		}
 		showNotification(t('notifications.userDeleted'), 'success');
 	};
 
@@ -123,7 +116,7 @@ function App() {
 
 			<UserForm
 				open={openDialog}
-				user={currentUser}
+				user={selectedUser}
 				onClose={handleCloseDialog}
 				onSubmit={handleSubmitUser}
 			/>
