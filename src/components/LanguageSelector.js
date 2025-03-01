@@ -16,6 +16,7 @@ const LanguageSelector = () => {
 			<InputLabel id='language-select-label'>Language</InputLabel>
 			<Select
 				labelId='language-select-label'
+				defaultValue='en'
 				id='language-select'
 				name='language'
 				value={i18n.language}
