@@ -177,20 +177,18 @@ describe('usersSlice', () => {
 	});
 
 	test('should handle deleteUserSuccess', () => {
+		const initialUsers = [
+			{ id: 1, name: 'John' },
+			{ id: 2, name: 'Jane' },
+		];
+
 		const nextState = usersReducer(
-			{ ...initialState, loading: true, users: mockUsers },
+			{ ...initialState, loading: true, users: initialUsers },
 			deleteUserSuccess(1)
 		);
+
 		expect(nextState.loading).toBe(false);
-		expect(nextState.users).toEqual([
-			{
-				id: '2',
-				name: 'Jane Smith',
-				email: 'jane@example.com',
-				phone: '0987654321',
-				role: 'User',
-			},
-		]);
+		expect(nextState.users).toEqual([{ id: 2, name: 'Jane' }]);
 		expect(nextState.error).toBe(null);
 	});
 
@@ -234,12 +232,16 @@ describe('usersSlice', () => {
 		expect(state.loading).toBe(true);
 
 		// Fetch users completes successfully
-		state = usersReducer(state, fetchUsersSuccess(mockUsers));
-		expect(state.users).toEqual(mockUsers);
+		const users = [
+			{ id: 1, name: 'John' },
+			{ id: 2, name: 'Jane' },
+		];
+		state = usersReducer(state, fetchUsersSuccess(users));
+		expect(state.users).toEqual(users);
 		expect(state.loading).toBe(false);
 
 		// Create user starts loading
-		const newUser = mockUser;
+		const newUser = { name: 'Bob', email: 'bob@example.com' };
 		state = usersReducer(state, createUserRequest(newUser));
 		expect(state.loading).toBe(true);
 
@@ -257,7 +259,7 @@ describe('usersSlice', () => {
 		// Delete user completes successfully
 		state = usersReducer(state, deleteUserSuccess(1));
 		expect(state.users).toHaveLength(2);
-		expect(state.users).not.toContainEqual(mockUsers[0]);
+		expect(state.users).not.toContainEqual(users[0]);
 		expect(state.loading).toBe(false);
 	});
 });
