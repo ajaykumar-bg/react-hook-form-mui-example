@@ -3,7 +3,7 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const LanguageSelector = () => {
-	const { t, i18n } = useTranslation();
+	const { i18n } = useTranslation();
 
 	const changeLanguage = (event) => {
 		const language = event.target.value;
@@ -21,20 +21,11 @@ const LanguageSelector = () => {
 				value={i18n.language}
 				label='Language'
 				onChange={changeLanguage}
-				data-testid='language-select'
 			>
-				<MenuItem
-					name='english'
-					data-testid='language-option-english'
-					value='en'
-				>
+				<MenuItem name='english' value='en'>
 					English
 				</MenuItem>
-				<MenuItem
-					name='spanish'
-					data-testid='language-option-spanish'
-					value='es'
-				>
+				<MenuItem name='spanish' value='es'>
 					Spanish
 				</MenuItem>
 			</Select>
