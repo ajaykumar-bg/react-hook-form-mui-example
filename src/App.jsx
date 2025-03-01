@@ -5,8 +5,6 @@ import UserForm from './components/UserForm';
 import AddUserButton from './components/AddUserButton';
 import LanguageSelector from './components/LanguageSelector';
 import { useTranslation } from 'react-i18next';
-// Import i18n initialization
-import './i18n/i18n';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
