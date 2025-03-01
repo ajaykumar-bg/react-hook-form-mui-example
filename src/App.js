@@ -1,10 +1,11 @@
-// App.jsx
 import React, { useState } from 'react';
 import { Container, Box, Typography, Snackbar, Alert } from '@mui/material';
 import UserTable from './components/UserTable';
 import UserForm from './components/UserForm';
 import AddUserButton from './components/AddUserButton';
-import { userSchema } from './validation/schemas';
+import LanguageSelector from './components/LanguageSelector';
+import { useTranslation } from 'react-i18next';
+import './i18n/i18n'; // Import i18n initialization
 
 // Initial data
 const initialUsers = [
@@ -33,6 +34,7 @@ function App() {
 		message: '',
 		severity: 'success',
 	});
+	const { t } = useTranslation();
 
 	// Handle dialog open for create/edit
 	const handleOpenDialog = (user = null) => {
@@ -49,16 +51,14 @@ function App() {
 	// Handle form submission
 	const handleSubmitUser = async (data) => {
 		try {
-			// Validate with yup schema
-			await userSchema.validate(data);
-
+			// Validate with yup schema (already validated by react-hook-form with yupResolver)
 			if (currentUser) {
 				// Update existing user
 				const updatedUsers = users.map((user) =>
 					user.id === currentUser.id ? { ...user, ...data } : user
 				);
 				setUsers(updatedUsers);
-				showNotification('User updated successfully!', 'success');
+				showNotification(t('notifications.userUpdated'), 'success');
 			} else {
 				// Add new user
 				const newUser = {
@@ -69,7 +69,7 @@ function App() {
 					...data,
 				};
 				setUsers([...users, newUser]);
-				showNotification('User added successfully!', 'success');
+				showNotification(t('notifications.userAdded'), 'success');
 			}
 			handleCloseDialog();
 		} catch (error) {
@@ -81,7 +81,7 @@ function App() {
 	const handleDeleteUser = (id) => {
 		const updatedUsers = users.filter((user) => user.id !== id);
 		setUsers(updatedUsers);
-		showNotification('User deleted successfully!', 'success');
+		showNotification(t('notifications.userDeleted'), 'success');
 	};
 
 	// Show notification
@@ -97,9 +97,17 @@ function App() {
 	return (
 		<Container maxWidth='md'>
 			<Box sx={{ my: 4 }}>
-				<Typography variant='h4' component='h1' gutterBottom align='center'>
-					User Management
-				</Typography>
+				<Box
+					display='flex'
+					justifyContent='space-between'
+					alignItems='center'
+					mb={2}
+				>
+					<Typography variant='h4' component='h1' gutterBottom>
+						{t('app.title')}
+					</Typography>
+					<LanguageSelector />
+				</Box>
 
 				<Box display='flex' justifyContent='flex-end' mb={2}>
 					<AddUserButton onAddClick={() => handleOpenDialog()} />

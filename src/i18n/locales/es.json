@@ -1,0 +1,46 @@
+{
+	"app": {
+		"title": "Gestión de Usuarios"
+	},
+	"table": {
+		"name": "Nombre",
+		"email": "Correo electrónico",
+		"phone": "Teléfono",
+		"role": "Rol",
+		"actions": "Acciones",
+		"noUsers": "No se encontraron usuarios"
+	},
+	"form": {
+		"addUser": "Añadir Nuevo Usuario",
+		"editUser": "Editar Usuario",
+		"nameLabel": "Nombre",
+		"emailLabel": "Correo electrónico",
+		"phoneLabel": "Teléfono",
+		"roleLabel": "Rol",
+		"cancel": "Cancelar",
+		"update": "Actualizar",
+		"add": "Añadir"
+	},
+	"buttons": {
+		"addUser": "Añadir Usuario"
+	},
+	"validation": {
+		"nameRequired": "El nombre es obligatorio",
+		"nameMinLength": "El nombre debe tener al menos 3 caracteres",
+		"emailRequired": "El correo electrónico es obligatorio",
+		"emailInvalid": "Formato de correo electrónico inválido",
+		"phoneRequired": "El teléfono es obligatorio",
+		"phoneFormat": "El teléfono debe tener 10 dígitos",
+		"roleRequired": "El rol es obligatorio"
+	},
+	"notifications": {
+		"userAdded": "¡Usuario añadido exitosamente!",
+		"userUpdated": "¡Usuario actualizado exitosamente!",
+		"userDeleted": "¡Usuario eliminado exitosamente!"
+	},
+	"languageSelector": {
+		"language": "Idioma",
+		"english": "Inglés",
+		"spanish": "Español"
+	}
+}

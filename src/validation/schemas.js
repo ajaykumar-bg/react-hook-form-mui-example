@@ -1,17 +1,21 @@
+// validation/schemas.js (updated with i18n)
 import * as yup from 'yup';
+import i18n from '../i18n/i18n';
 
-export const userSchema = yup.object().shape({
-	name: yup
-		.string()
-		.required('Name is required')
-		.min(3, 'Name must be at least 3 characters'),
-	email: yup
-		.string()
-		.required('Email is required')
-		.email('Invalid email format'),
-	phone: yup
-		.string()
-		.required('Phone is required')
-		.matches(/^\d{10}$/, 'Phone must be 10 digits'),
-	role: yup.string().required('Role is required'),
-});
+export const createUserSchema = () => {
+	return yup.object().shape({
+		name: yup
+			.string()
+			.required(i18n.t('validation.nameRequired'))
+			.min(3, i18n.t('validation.nameMinLength')),
+		email: yup
+			.string()
+			.required(i18n.t('validation.emailRequired'))
+			.email(i18n.t('validation.emailInvalid')),
+		phone: yup
+			.string()
+			.required(i18n.t('validation.phoneRequired'))
+			.matches(/^\d{10}$/, i18n.t('validation.phoneFormat')),
+		role: yup.string().required(i18n.t('validation.roleRequired')),
+	});
+};
