@@ -5,7 +5,8 @@ import UserForm from './components/UserForm';
 import AddUserButton from './components/AddUserButton';
 import LanguageSelector from './components/LanguageSelector';
 import { useTranslation } from 'react-i18next';
-import './i18n/i18n'; // Import i18n initialization
+// Import i18n initialization
+import './i18n/i18n';
 
 // Initial data
 const initialUsers = [

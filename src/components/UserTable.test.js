@@ -29,11 +29,11 @@ describe('UserTable Component', () => {
 		);
 
 		// Check for column headers
-		expect(screen.getByText('Name')).toBeInTheDocument();
-		expect(screen.getByText('Email')).toBeInTheDocument();
-		expect(screen.getByText('Phone')).toBeInTheDocument();
-		expect(screen.getByText('Role')).toBeInTheDocument();
-		expect(screen.getByText('Actions')).toBeInTheDocument();
+		expect(screen.getByText('table.name')).toBeInTheDocument();
+		expect(screen.getByText('table.email')).toBeInTheDocument();
+		expect(screen.getByText('table.phone')).toBeInTheDocument();
+		expect(screen.getByText('table.role')).toBeInTheDocument();
+		expect(screen.getByText('table.actions')).toBeInTheDocument();
 
 		// Check for user data
 		expect(screen.getByText('John Doe')).toBeInTheDocument();

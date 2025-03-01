@@ -25,11 +25,11 @@ describe('UserForm Component', () => {
 			/>
 		);
 
-		expect(screen.getByText('Add New User')).toBeInTheDocument();
-		expect(screen.getByLabelText('Name')).toHaveValue('');
-		expect(screen.getByLabelText('Email')).toHaveValue('');
-		expect(screen.getByLabelText('Phone')).toHaveValue('');
-		expect(screen.getByLabelText('Role')).toHaveValue('');
+		expect(screen.getByText('form.addUser')).toBeInTheDocument();
+		expect(screen.getByLabelText('form.nameLabel')).toHaveValue('');
+		expect(screen.getByLabelText('form.emailLabel')).toHaveValue('');
+		expect(screen.getByLabelText('form.phoneLabel')).toHaveValue('');
+		expect(screen.getByLabelText('form.roleLabel')).toHaveValue('');
 	});
 
 	test('renders form with user data for editing', () => {
@@ -42,11 +42,13 @@ describe('UserForm Component', () => {
 			/>
 		);
 
-		expect(screen.getByText('Edit User')).toBeInTheDocument();
-		expect(screen.getByLabelText('Name')).toHaveValue('John Doe');
-		expect(screen.getByLabelText('Email')).toHaveValue('john@example.com');
-		expect(screen.getByLabelText('Phone')).toHaveValue('1234567890');
-		expect(screen.getByLabelText('Role')).toHaveValue('Admin');
+		expect(screen.getByText('form.editUser')).toBeInTheDocument();
+		expect(screen.getByLabelText('form.nameLabel')).toHaveValue('John Doe');
+		expect(screen.getByLabelText('form.emailLabel')).toHaveValue(
+			'john@example.com'
+		);
+		expect(screen.getByLabelText('form.phoneLabel')).toHaveValue('1234567890');
+		expect(screen.getByLabelText('form.roleLabel')).toHaveValue('Admin');
 	});
 
 	test('calls onSubmit with form data when form is submitted', async () => {
@@ -60,13 +62,19 @@ describe('UserForm Component', () => {
 		);
 
 		// Fill out the form
-		await userEvent.type(screen.getByLabelText('Name'), 'Test User');
-		await userEvent.type(screen.getByLabelText('Email'), 'test@example.com');
-		await userEvent.type(screen.getByLabelText('Phone'), '1234567890');
-		await userEvent.type(screen.getByLabelText('Role'), 'Tester');
+		await userEvent.type(screen.getByLabelText('form.nameLabel'), 'Test User');
+		await userEvent.type(
+			screen.getByLabelText('form.emailLabel'),
+			'test@example.com'
+		);
+		await userEvent.type(
+			screen.getByLabelText('form.phoneLabel'),
+			'1234567890'
+		);
+		await userEvent.type(screen.getByLabelText('form.roleLabel'), 'Tester');
 
 		// Submit the form
-		fireEvent.click(screen.getByText('Add'));
+		fireEvent.click(screen.getByText('form.add'));
 
 		// Check that onSubmit was called with correct data
 		await waitFor(() => {
@@ -92,7 +100,7 @@ describe('UserForm Component', () => {
 			/>
 		);
 
-		fireEvent.click(screen.getByText('Cancel'));
+		fireEvent.click(screen.getByText('form.cancel'));
 
 		expect(mockClose).toHaveBeenCalled();
 	});

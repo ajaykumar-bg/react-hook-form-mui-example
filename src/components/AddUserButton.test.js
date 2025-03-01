@@ -7,14 +7,14 @@ describe('AddUserButton Component', () => {
 		const mockClick = jest.fn();
 		render(<AddUserButton onAddClick={mockClick} />);
 
-		expect(screen.getByText('Add User')).toBeInTheDocument();
+		expect(screen.getByText('buttons.addUser')).toBeInTheDocument();
 	});
 
 	test('calls onAddClick when button is clicked', () => {
 		const mockClick = jest.fn();
 		render(<AddUserButton onAddClick={mockClick} />);
 
-		fireEvent.click(screen.getByText('Add User'));
+		fireEvent.click(screen.getByText('buttons.addUser'));
 
 		expect(mockClick).toHaveBeenCalled();
 	});

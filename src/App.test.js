@@ -6,7 +6,7 @@ import App from './App';
 describe('App Component', () => {
 	test('renders the app title', () => {
 		render(<App />);
-		expect(screen.getByText('User Management')).toBeInTheDocument();
+		expect(screen.getByText('app.title')).toBeInTheDocument();
 	});
 
 	test('shows initial users', () => {
@@ -19,26 +19,32 @@ describe('App Component', () => {
 		render(<App />);
 
 		// Click the Add User button
-		fireEvent.click(screen.getByText('Add User'));
+		fireEvent.click(screen.getByText('buttons.addUser'));
 
 		// Check that dialog appears with correct title
-		expect(screen.getByText('Add New User')).toBeInTheDocument();
+		expect(screen.getByText('form.addUser')).toBeInTheDocument();
 	});
 
 	test('adds a new user', async () => {
 		render(<App />);
 
 		// Click Add User button
-		fireEvent.click(screen.getByText('Add User'));
+		fireEvent.click(screen.getByText('buttons.addUser'));
 
 		// Fill out the form
-		await userEvent.type(screen.getByLabelText('Name'), 'Test User');
-		await userEvent.type(screen.getByLabelText('Email'), 'test@example.com');
-		await userEvent.type(screen.getByLabelText('Phone'), '1234567890');
-		await userEvent.type(screen.getByLabelText('Role'), 'Tester');
+		await userEvent.type(screen.getByLabelText('form.nameLabel'), 'Test User');
+		await userEvent.type(
+			screen.getByLabelText('form.emailLabel'),
+			'test@example.com'
+		);
+		await userEvent.type(
+			screen.getByLabelText('form.phoneLabel'),
+			'1234567890'
+		);
+		await userEvent.type(screen.getByLabelText('form.roleLabel'), 'Tester');
 
 		// Submit the form
-		fireEvent.click(screen.getByText('Add'));
+		fireEvent.click(screen.getByText('form.add'));
 
 		// Check that the new user appears in the table
 		await waitFor(() => {
@@ -65,7 +71,7 @@ describe('App Component', () => {
 		await userEvent.type(nameInput, 'John Updated');
 
 		// Submit the form
-		fireEvent.click(screen.getByText('Update'));
+		fireEvent.click(screen.getByText('form.update'));
 
 		// Check that the updated user appears in the table
 		await waitFor(() => {
@@ -93,17 +99,17 @@ describe('App Component', () => {
 		render(<App />);
 
 		// Click Add User button
-		fireEvent.click(screen.getByText('Add User'));
+		fireEvent.click(screen.getByText('buttons.addUser'));
 
 		// Submit the empty form
-		fireEvent.click(screen.getByText('Add'));
+		fireEvent.click(screen.getByText('form.add'));
 
 		// Check for validation errors
 		await waitFor(() => {
-			expect(screen.getByText('Name is required')).toBeInTheDocument();
-			expect(screen.getByText('Email is required')).toBeInTheDocument();
-			expect(screen.getByText('Phone is required')).toBeInTheDocument();
-			expect(screen.getByText('Role is required')).toBeInTheDocument();
+			expect(screen.getByText('validation.nameRequired')).toBeInTheDocument();
+			expect(screen.getByText('validation.emailRequired')).toBeInTheDocument();
+			expect(screen.getByText('validation.phoneRequired')).toBeInTheDocument();
+			expect(screen.getByText('validation.roleRequired')).toBeInTheDocument();
 		});
 	});
 });
