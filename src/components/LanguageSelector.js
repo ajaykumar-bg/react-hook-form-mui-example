@@ -13,18 +13,30 @@ const LanguageSelector = () => {
 
 	return (
 		<FormControl sx={{ minWidth: 120 }}>
-			<InputLabel id='language-select-label'>
-				{t('languageSelector.language')}
-			</InputLabel>
+			<InputLabel id='language-select-label'>Language</InputLabel>
 			<Select
 				labelId='language-select-label'
 				id='language-select'
+				name='language'
 				value={i18n.language}
-				label={t('languageSelector.language')}
+				label='Language'
 				onChange={changeLanguage}
+				data-testid='language-select'
 			>
-				<MenuItem value='en'>{t('languageSelector.english')}</MenuItem>
-				<MenuItem value='es'>{t('languageSelector.spanish')}</MenuItem>
+				<MenuItem
+					name='english'
+					data-testid='language-option-english'
+					value='en'
+				>
+					English
+				</MenuItem>
+				<MenuItem
+					name='spanish'
+					data-testid='language-option-spanish'
+					value='es'
+				>
+					Spanish
+				</MenuItem>
 			</Select>
 		</FormControl>
 	);
