@@ -15,7 +15,7 @@ import {
   selectUserForEdit,
   selectUsers,
   selectSelectedUser,
-} from './redux/users/usersSlice';
+} from './redux/reducers/usersSlice';
 
 function App() {
 	// const [users, setUsers] = useState([]);

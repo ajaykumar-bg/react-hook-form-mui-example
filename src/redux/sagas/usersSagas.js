@@ -10,7 +10,7 @@ import {
 	deleteUserRequest,
 	deleteUserSuccess,
 	apiFailure,
-} from './usersSlice';
+} from '../reducers/usersSlice';
 
 // Worker Sagas
 function* fetchUsers() {
