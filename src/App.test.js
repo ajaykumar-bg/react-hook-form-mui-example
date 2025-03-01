@@ -106,10 +106,10 @@ describe('App Component', () => {
 
 		// Check for validation errors
 		await waitFor(() => {
-			expect(screen.getByText('validation.nameRequired')).toBeInTheDocument();
-			expect(screen.getByText('validation.emailRequired')).toBeInTheDocument();
-			expect(screen.getByText('validation.phoneRequired')).toBeInTheDocument();
-			expect(screen.getByText('validation.roleRequired')).toBeInTheDocument();
+			expect(screen.getByText('Name is required')).toBeInTheDocument();
+			expect(screen.getByText('Email is required')).toBeInTheDocument();
+			expect(screen.getByText('Phone is required')).toBeInTheDocument();
+			expect(screen.getByText('Role is required')).toBeInTheDocument();
 		});
 	});
 });

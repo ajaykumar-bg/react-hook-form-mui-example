@@ -104,4 +104,26 @@ describe('UserForm Component', () => {
 
 		expect(mockClose).toHaveBeenCalled();
 	});
+
+	test('validate the form when add button is clicked without filling the form', async () => {
+		render(
+			<UserForm
+				open={true}
+				user={null}
+				onClose={mockClose}
+				onSubmit={mockSubmit}
+			/>
+		);
+
+		// Submit the empty form
+		fireEvent.click(screen.getByText('form.add'));
+
+		// Check for validation errors
+		await waitFor(() => {
+			expect(screen.getByText('Name is required')).toBeInTheDocument();
+			expect(screen.getByText('Email is required')).toBeInTheDocument();
+			expect(screen.getByText('Phone is required')).toBeInTheDocument();
+			expect(screen.getByText('Role is required')).toBeInTheDocument();
+		});
+	});
 });

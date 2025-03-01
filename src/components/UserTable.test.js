@@ -67,6 +67,6 @@ describe('UserTable Component', () => {
 	test('shows "No users found" when users array is empty', () => {
 		render(<UserTable users={[]} onEdit={mockEdit} onDelete={mockDelete} />);
 
-		expect(screen.getByText('No users found')).toBeInTheDocument();
+		expect(screen.getByText('table.noUsers')).toBeInTheDocument();
 	});
 });
