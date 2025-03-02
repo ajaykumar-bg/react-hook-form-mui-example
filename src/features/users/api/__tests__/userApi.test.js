@@ -1,22 +1,28 @@
+import { mockUsers } from '../../__tests__/users.mock';
 import {
 	fetchUsers,
 	fetchUserById,
 	createUser,
 	updateUser,
 	deleteUser,
-} from '../path/to/user-api'; // Adjust the import path as needed
+} from '../userApi'; // Adjust the import path as needed
 import fetchMock from 'fetch-mock';
-import { API_URL } from '../../../constants';
 
-// Mock data
-const mockUsers = [
-	{ id: 1, name: 'John Doe', email: 'john@example.com' },
-	{ id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-];
+const API_URL = 'http://localhost:3030';
+
+jest.mock('fetch-mock', () => ({
+	restore: jest.fn(),
+	getOnce: jest.fn(),
+	postOnce: jest.fn(),
+	putOnce: jest.fn(),
+	deleteOnce: jest.fn(),
+	called: jest.fn(),
+	lastOptions: jest.fn(),
+}));
 
 const newUser = { name: 'New User', email: 'new@example.com' };
-const createdUser = { id: 3, ...newUser };
 
+const createdUser = { id: 3, ...newUser };
 const updatedUserData = { name: 'Updated Name', email: 'updated@example.com' };
 const updatedUser = { id: 1, ...updatedUserData };
 
