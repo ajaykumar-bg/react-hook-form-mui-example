@@ -86,7 +86,7 @@ function UserManagement() {
 		setSnackbar({ ...snackbar, open: false });
 	};
 	return (
-		<Container maxWidth='md'>
+		<Container>
 			<Box sx={{ my: 4 }}>
 				<Box
 					display='flex'
