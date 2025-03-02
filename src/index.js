@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from '@mui/material/styles';
 
 import App from './App';
+import './App.css';
 import './i18n/i18n'; // Import i18n initialization
 import { theme } from './theme';
 

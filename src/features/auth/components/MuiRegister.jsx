@@ -31,6 +31,7 @@ import {
 	Phone,
 	CheckCircleOutline,
 } from '@mui/icons-material';
+import AuthLayout from '../../layout/AuthLayout';
 
 const Register = ({ onSignUp, isLoading = false, errorMessage = null }) => {
 	const [activeStep, setActiveStep] = useState(0);
@@ -412,149 +413,155 @@ const Register = ({ onSignUp, isLoading = false, errorMessage = null }) => {
 	};
 
 	return (
-		<Card sx={{ maxWidth: 600, width: '100%', boxShadow: 3, borderRadius: 2 }}>
-			<CardContent sx={{ p: 4 }}>
-				<Typography
-					variant='h4'
-					component='h1'
-					align='center'
-					gutterBottom
-					fontWeight='bold'
-				>
-					Create Account
-				</Typography>
-
-				<Typography
-					variant='body2'
-					color='text.secondary'
-					align='center'
-					sx={{ mb: 4 }}
-				>
-					Fill in your details to get started
-				</Typography>
-
-				{errorMessage && (
-					<Alert severity='error' sx={{ mb: 3 }}>
-						{errorMessage}
-					</Alert>
-				)}
-
-				<Stepper activeStep={activeStep} sx={{ mb: 4 }}>
-					{steps.map((label) => (
-						<Step key={label}>
-							<StepLabel>{label}</StepLabel>
-						</Step>
-					))}
-				</Stepper>
-
-				<Box component='form' onSubmit={handleSubmit} noValidate>
-					{renderStepContent(activeStep)}
-
-					<Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-						{activeStep > 0 ? (
-							<Button onClick={handleBack} sx={{ textTransform: 'none' }}>
-								Back
-							</Button>
-						) : (
-							<div></div>
-						)}
-
-						<Button
-							type='submit'
-							variant='contained'
-							size='large'
-							sx={{
-								px: 4,
-								py: 1,
-								textTransform: 'none',
-								fontWeight: 'bold',
-							}}
-							disabled={isLoading || (activeStep === 2 && !termsAccepted)}
-						>
-							{isLoading ? (
-								<CircularProgress size={24} color='inherit' />
-							) : activeStep === steps.length - 1 ? (
-								'Complete Registration'
-							) : (
-								'Continue'
-							)}
-						</Button>
-					</Box>
-
-					{activeStep === 0 && (
-						<>
-							<Divider sx={{ my: 3 }}>
-								<Typography variant='body2' color='text.secondary'>
-									OR
-								</Typography>
-							</Divider>
-
-							<Box
-								sx={{
-									display: 'flex',
-									justifyContent: 'space-between',
-									gap: 2,
-								}}
-							>
-								<Button
-									variant='outlined'
-									fullWidth
-									startIcon={<Google />}
-									sx={{
-										py: 1,
-										textTransform: 'none',
-										borderColor: '#DDDDDD',
-										color: 'text.primary',
-									}}
-								>
-									Google
-								</Button>
-
-								<Button
-									variant='outlined'
-									fullWidth
-									startIcon={<Facebook />}
-									sx={{
-										py: 1,
-										textTransform: 'none',
-										borderColor: '#DDDDDD',
-										color: 'text.primary',
-									}}
-								>
-									Facebook
-								</Button>
-
-								<Button
-									variant='outlined'
-									fullWidth
-									startIcon={<Twitter />}
-									sx={{
-										py: 1,
-										textTransform: 'none',
-										borderColor: '#DDDDDD',
-										color: 'text.primary',
-									}}
-								>
-									Twitter
-								</Button>
-							</Box>
-						</>
-					)}
+		<AuthLayout>
+			<Card
+				sx={{ maxWidth: 600, width: '100%', boxShadow: 3, borderRadius: 2 }}
+			>
+				<CardContent sx={{ p: 4 }}>
+					<Typography
+						variant='h4'
+						component='h1'
+						align='center'
+						gutterBottom
+						fontWeight='bold'
+					>
+						Create Account
+					</Typography>
 
 					<Typography
 						variant='body2'
-						align='center'
 						color='text.secondary'
-						sx={{ mt: 3 }}
+						align='center'
+						sx={{ mb: 4 }}
 					>
-						Already have an account?{' '}
-						<Link href='login' underline='hover' fontWeight='bold'>
-							Sign In
-						</Link>
+						Fill in your details to get started
 					</Typography>
-				</Box>
-			</CardContent>
-		</Card>
+
+					{errorMessage && (
+						<Alert severity='error' sx={{ mb: 3 }}>
+							{errorMessage}
+						</Alert>
+					)}
+
+					<Stepper activeStep={activeStep} sx={{ mb: 4 }}>
+						{steps.map((label) => (
+							<Step key={label}>
+								<StepLabel>{label}</StepLabel>
+							</Step>
+						))}
+					</Stepper>
+
+					<Box component='form' onSubmit={handleSubmit} noValidate>
+						{renderStepContent(activeStep)}
+
+						<Box
+							sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}
+						>
+							{activeStep > 0 ? (
+								<Button onClick={handleBack} sx={{ textTransform: 'none' }}>
+									Back
+								</Button>
+							) : (
+								<div></div>
+							)}
+
+							<Button
+								type='submit'
+								variant='contained'
+								size='large'
+								sx={{
+									px: 4,
+									py: 1,
+									textTransform: 'none',
+									fontWeight: 'bold',
+								}}
+								disabled={isLoading || (activeStep === 2 && !termsAccepted)}
+							>
+								{isLoading ? (
+									<CircularProgress size={24} color='inherit' />
+								) : activeStep === steps.length - 1 ? (
+									'Complete Registration'
+								) : (
+									'Continue'
+								)}
+							</Button>
+						</Box>
+
+						{activeStep === 0 && (
+							<>
+								<Divider sx={{ my: 3 }}>
+									<Typography variant='body2' color='text.secondary'>
+										OR
+									</Typography>
+								</Divider>
+
+								<Box
+									sx={{
+										display: 'flex',
+										justifyContent: 'space-between',
+										gap: 2,
+									}}
+								>
+									<Button
+										variant='outlined'
+										fullWidth
+										startIcon={<Google />}
+										sx={{
+											py: 1,
+											textTransform: 'none',
+											borderColor: '#DDDDDD',
+											color: 'text.primary',
+										}}
+									>
+										Google
+									</Button>
+
+									<Button
+										variant='outlined'
+										fullWidth
+										startIcon={<Facebook />}
+										sx={{
+											py: 1,
+											textTransform: 'none',
+											borderColor: '#DDDDDD',
+											color: 'text.primary',
+										}}
+									>
+										Facebook
+									</Button>
+
+									<Button
+										variant='outlined'
+										fullWidth
+										startIcon={<Twitter />}
+										sx={{
+											py: 1,
+											textTransform: 'none',
+											borderColor: '#DDDDDD',
+											color: 'text.primary',
+										}}
+									>
+										Twitter
+									</Button>
+								</Box>
+							</>
+						)}
+
+						<Typography
+							variant='body2'
+							align='center'
+							color='text.secondary'
+							sx={{ mt: 3 }}
+						>
+							Already have an account?{' '}
+							<Link href='login' underline='hover' fontWeight='bold'>
+								Sign In
+							</Link>
+						</Typography>
+					</Box>
+				</CardContent>
+			</Card>
+		</AuthLayout>
 	);
 };
 
