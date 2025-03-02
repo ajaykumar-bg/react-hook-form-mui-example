@@ -24,7 +24,7 @@ import {
 	Facebook,
 	Twitter,
 } from '@mui/icons-material';
-import AuthLayout from '../../layout/AuthLayout';
+import AuthLayout from '../../../layout/AuthLayout';
 
 const Login = ({ onLogin, isLoading = false, errorMessage = null }) => {
 	const [formData, setFormData] = useState({

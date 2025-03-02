@@ -8,10 +8,18 @@ import {
 } from 'react-router-dom';
 
 import { store } from './redux/store';
-import ResponsiveDrawer from './components/ResponsiveDrawer';
+// import ResponsiveDrawer from './components/ResponsiveDrawer';
+
 import Login from './features/auth/components/MuiLogin';
 import Register from './features/auth/components/MuiRegister';
 import ProtectedRoute from './components/ProtectedRoute';
+
+import AppLayout from './layout/AppLayout';
+
+import MainGrid from './layout/components/MainGrid';
+import UserManagement from './features/users/components/UserManagement';
+import Settings from './components/Settings';
+import About from './components/About';
 
 const App = () => {
 	return (
@@ -21,14 +29,46 @@ const App = () => {
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
 					<Route
-						path='/users'
+						path='/dashboard'
 						element={
 							<ProtectedRoute>
-								<ResponsiveDrawer />
+								<AppLayout>
+									<MainGrid />
+								</AppLayout>
 							</ProtectedRoute>
 						}
 					/>
-					<Route path='/' element={<Navigate to='/users' replace />} />
+					<Route
+						path='/users'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<UserManagement />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/settings'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<Settings />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/about'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<About />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route path='/' element={<Navigate to='/dashboard' replace />} />
 				</Routes>
 			</Router>
 		</Provider>
