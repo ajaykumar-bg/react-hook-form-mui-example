@@ -8,10 +8,13 @@ import {
 } from 'react-router-dom';
 
 import { store } from './redux/store';
-import ResponsiveDrawer from './components/ResponsiveDrawer';
+// import ResponsiveDrawer from './components/ResponsiveDrawer';
+
 import Login from './features/auth/components/MuiLogin';
 import Register from './features/auth/components/MuiRegister';
 import ProtectedRoute from './components/ProtectedRoute';
+
+import AppLayout from './features/layout/AppLayout';
 
 const App = () => {
 	return (
@@ -24,7 +27,8 @@ const App = () => {
 						path='/users'
 						element={
 							<ProtectedRoute>
-								<ResponsiveDrawer />
+								{/* <ResponsiveDrawer /> */}
+								<AppLayout></AppLayout>
 							</ProtectedRoute>
 						}
 					/>
