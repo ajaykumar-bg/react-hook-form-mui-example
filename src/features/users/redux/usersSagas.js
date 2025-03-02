@@ -24,7 +24,7 @@ import {
 	deleteUser,
 } from '../api/userApi';
 
-function* fetchUsersSaga() {
+export function* fetchUsersSaga() {
 	try {
 		const users = yield call(fetchUsers);
 		yield put(fetchUsersSuccess(users));
@@ -33,7 +33,7 @@ function* fetchUsersSaga() {
 	}
 }
 
-function* fetchUserSaga(action) {
+export function* fetchUserSaga(action) {
 	try {
 		const user = yield call(fetchUserById, action.payload);
 		yield put(fetchUserSuccess(user));
@@ -42,7 +42,7 @@ function* fetchUserSaga(action) {
 	}
 }
 
-function* createUserSaga(action) {
+export function* createUserSaga(action) {
 	try {
 		const newUser = yield call(createUser, action.payload);
 		yield put(createUserSuccess(newUser));
@@ -51,7 +51,7 @@ function* createUserSaga(action) {
 	}
 }
 
-function* updateUserSaga(action) {
+export function* updateUserSaga(action) {
 	try {
 		const { id, userData } = action.payload;
 		const updatedUser = yield call(updateUser, id, userData);
@@ -61,7 +61,7 @@ function* updateUserSaga(action) {
 	}
 }
 
-function* deleteUserSaga(action) {
+export function* deleteUserSaga(action) {
 	try {
 		yield call(deleteUser, action.payload);
 		yield put(deleteUserSuccess(action.payload));

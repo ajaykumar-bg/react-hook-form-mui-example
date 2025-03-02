@@ -7,7 +7,7 @@ import {
 	updateUser,
 	deleteUser,
 } from '../userApi';
-import { mockUsersAPIUrl, mockUsers } from '../redux/__tests__/users.mock';
+import { mockUsersAPIUrl, mockUsers } from '../../__tests__/users.mock';
 
 // Mock server setup
 
