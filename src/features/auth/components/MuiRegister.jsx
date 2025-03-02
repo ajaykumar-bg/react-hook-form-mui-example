@@ -31,7 +31,7 @@ import {
 	Phone,
 	CheckCircleOutline,
 } from '@mui/icons-material';
-import AuthLayout from '../../layout/AuthLayout';
+import AuthLayout from '../../../layout/AuthLayout';
 
 const Register = ({ onSignUp, isLoading = false, errorMessage = null }) => {
 	const [activeStep, setActiveStep] = useState(0);

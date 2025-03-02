@@ -14,7 +14,7 @@ import Login from './features/auth/components/MuiLogin';
 import Register from './features/auth/components/MuiRegister';
 import ProtectedRoute from './components/ProtectedRoute';
 
-import AppLayout from './features/layout/AppLayout';
+import AppLayout from './layout/AppLayout';
 
 const App = () => {
 	return (
