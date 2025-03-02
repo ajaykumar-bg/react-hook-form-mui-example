@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import UserTable from './UserTable';
 import UserForm from './UserForm';
 import AddUserButton from './AddUserButton';
-import LanguageSelector from '../../../components/LanguageSelector';
 
 import {
 	fetchUsersRequest,
@@ -97,7 +96,6 @@ function UserManagement() {
 					<Typography variant='h4' component='h1' gutterBottom>
 						{t('app.title')}
 					</Typography>
-					<LanguageSelector />
 				</Box>
 
 				<Box display='flex' justifyContent='flex-end' mb={2}>

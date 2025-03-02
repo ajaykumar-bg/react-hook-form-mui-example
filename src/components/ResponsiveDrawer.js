@@ -22,10 +22,11 @@ import InfoIcon from '@mui/icons-material/Info';
 import MailIcon from '@mui/icons-material/Mail';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-import Home from '../components/Home';
-import Contact from '../components/Contact';
-import Settings from '../components/Settings';
-import About from '../components/About';
+import Home from './Home';
+import Contact from './Contact';
+import Settings from './Settings';
+import About from './About';
+import LanguageSelector from './LanguageSelector';
 
 import UserManagement from '../features/users/components/UserManagement';
 
@@ -68,6 +69,10 @@ function ResponsiveDrawer() {
 					</ListItem>
 				))}
 			</List>
+			<Divider />
+			<Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
+				<LanguageSelector />
+			</Box>
 		</div>
 	);
 
