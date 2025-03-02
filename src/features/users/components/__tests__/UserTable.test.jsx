@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import UserTable from './UserTable';
+import UserTable from '../UserTable';
 
 describe('UserTable Component', () => {
 	const mockUsers = [

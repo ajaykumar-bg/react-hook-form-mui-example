@@ -6,19 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import UserTable from './UserTable';
 import UserForm from './UserForm';
 import AddUserButton from './AddUserButton';
-import LanguageSelector from './LanguageSelector';
+import LanguageSelector from '../../../components/LanguageSelector';
 
 import {
-  fetchUsersRequest,
-  createUserRequest,
-  updateUserRequest,
-  deleteUserRequest,
-  selectUserForEdit,
-  selectUsers,
-  selectSelectedUser,
-} from '../redux/reducers/usersSlice';
+	fetchUsersRequest,
+	createUserRequest,
+	updateUserRequest,
+	deleteUserRequest,
+	selectUserForEdit,
+} from '../redux/usersActions';
+import { selectUsers, selectSelectedUser } from '../redux/usersSelectors';
 function UserManagement() {
-    // const [users, setUsers] = useState([]);
 	const dispatch = useDispatch();
 	const users = useSelector(selectUsers);
 	const selectedUser = useSelector(selectSelectedUser);
@@ -32,7 +30,7 @@ function UserManagement() {
 
 	useEffect(() => {
 		dispatch(fetchUsersRequest());
-	  }, [dispatch]);
+	}, [dispatch]);
 
 	// Handle dialog open for create/edit
 	const handleOpenDialog = (user = null) => {
@@ -52,10 +50,12 @@ function UserManagement() {
 			// Validate with yup schema (already validated by react-hook-form with yupResolver)
 			if (selectedUser) {
 				// Update existing user
-				dispatch(updateUserRequest({
-					...selectedUser,
-					...formData,
-				}));
+				dispatch(
+					updateUserRequest({
+						...selectedUser,
+						...formData,
+					})
+				);
 				showNotification(t('notifications.userUpdated'), 'success');
 			} else {
 				// Add new user
@@ -85,8 +85,8 @@ function UserManagement() {
 	const handleCloseSnackbar = () => {
 		setSnackbar({ ...snackbar, open: false });
 	};
-  return (
-    <Container maxWidth='md'>
+	return (
+		<Container maxWidth='md'>
 			<Box sx={{ my: 4 }}>
 				<Box
 					display='flex'
@@ -129,7 +129,7 @@ function UserManagement() {
 				</Alert>
 			</Snackbar>
 		</Container>
-  )
+	);
 }
 
-export default UserManagement
+export default UserManagement;

@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import { store } from './redux/store';
-import Login from './components/Login';
-import UserManagement from './components/UserManagement';
+import Login from './features/auth/components/Login';
+import UserManagement from './features/users/components/UserManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 
 

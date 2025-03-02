@@ -1,3 +1,5 @@
+export const mockUsersAPIUrl = 'http://localhost:3030/users';
+
 export const mockUsers = [
 	{
 		id: '1',

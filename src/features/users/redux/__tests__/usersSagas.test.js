@@ -6,7 +6,7 @@ import {
 	updateUserSaga,
 	deleteUserSaga,
 	usersSaga,
-} from '../usersSaga';
+} from '../usersSagas';
 import {
 	fetchUsersSuccess,
 	fetchUsersFailure,

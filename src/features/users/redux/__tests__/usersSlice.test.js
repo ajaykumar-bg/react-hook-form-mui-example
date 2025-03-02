@@ -16,9 +16,9 @@ import usersReducer, {
 	deleteUserFailure,
 	selectUserForEdit,
 	clearSelectedUser,
-} from '../reducers/usersSlice';
+} from '../usersSlice';
 
-import { mockUsers, mockUser } from './users.mock';
+import { mockUsers, mockUser } from '../../../__tests__/users.mock';
 
 describe('usersSlice', () => {
 	const initialState = {

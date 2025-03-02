@@ -4,7 +4,7 @@ import {
   loginRequest,
   selectAuthLoading,
   selectAuthError
-} from '../redux/reducers/authSlice';
+} from '../redux/authSlice';
 
 const Login = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import AddUserButton from './AddUserButton';
+import AddUserButton from '../AddUserButton';
 
 describe('AddUserButton Component', () => {
 	test('renders add user button', () => {

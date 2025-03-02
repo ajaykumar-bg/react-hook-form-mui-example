@@ -1,12 +1,12 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { authApi } from '../../api/authApi';
+import { authApi } from '../api/authApi';
 import {
 	loginRequest,
 	loginSuccess,
 	logoutRequest,
 	logoutSuccess,
 	authFailure,
-} from '../reducers/authSlice';
+} from './authSlice';
 
 // Worker Sagas
 function* login(action) {
