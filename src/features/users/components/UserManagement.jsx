@@ -14,9 +14,8 @@ import {
 	updateUserRequest,
 	deleteUserRequest,
 	selectUserForEdit,
-	selectUsers,
-	selectSelectedUser,
-} from '../redux/usersSlice';
+} from '../redux/usersActions';
+import { selectUsers, selectSelectedUser } from '../redux/usersSelectors';
 function UserManagement() {
 	const dispatch = useDispatch();
 	const users = useSelector(selectUsers);

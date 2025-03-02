@@ -15,7 +15,7 @@ import {
 	deleteUserRequest,
 	deleteUserSuccess,
 	deleteUserFailure,
-} from './usersSlice';
+} from './usersActions';
 import {
 	fetchUsers,
 	fetchUserById,
