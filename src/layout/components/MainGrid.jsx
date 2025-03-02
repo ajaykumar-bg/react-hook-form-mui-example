@@ -1,20 +1,19 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-// import Grid from '@mui/material/Grid2';
-// import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid2';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import Copyright from './Copyright';
 
-// import ChartUserByCountry from './ChartUserByCountry';
+import ChartUserByCountry from './ChartUserByCountry';
 // import CustomizedTreeView from './CustomizedTreeView';
-// import CustomizedDataGrid from './CustomizedDataGrid';
-// import HighlightedCard from './HighlightedCard';
-// import PageViewsBarChart from './PageViewsBarChart';
-// import SessionsChart from './SessionsChart';
-// import StatCard from './StatCard';
+import CustomizedDataGrid from './CustomizedDataGrid';
+import HighlightedCard from './HighlightedCard';
+import PageViewsBarChart from './PageViewsBarChart';
+import SessionsChart from './SessionsChart';
+import StatCard from './StatCard';
 
-/*
 const data = [
 	{
 		title: 'Users',
@@ -48,7 +47,6 @@ const data = [
 		],
 	},
 ];
-*/
 
 export default function MainGrid() {
 	return (
@@ -58,7 +56,7 @@ export default function MainGrid() {
 				Overview
 			</Typography>
 
-			{/* <Grid
+			<Grid
 				container
 				spacing={2}
 				columns={12}
@@ -88,11 +86,11 @@ export default function MainGrid() {
 				</Grid>
 				<Grid size={{ xs: 12, lg: 3 }}>
 					<Stack gap={2} direction={{ xs: 'column', sm: 'row', lg: 'column' }}>
-						<CustomizedTreeView />
+						{/* <CustomizedTreeView /> */}
 						<ChartUserByCountry />
 					</Stack>
 				</Grid>
-			</Grid> */}
+			</Grid>
 			<Copyright sx={{ my: 4 }} />
 		</Box>
 	);
