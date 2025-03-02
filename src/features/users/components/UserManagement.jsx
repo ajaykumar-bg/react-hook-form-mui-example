@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import UserTable from './UserTable';
 import UserForm from './UserForm';
 import AddUserButton from './AddUserButton';
-import LanguageSelector from './LanguageSelector';
+import LanguageSelector from '../../../components/LanguageSelector';
 
 import {
   fetchUsersRequest,
@@ -16,7 +16,7 @@ import {
   selectUserForEdit,
   selectUsers,
   selectSelectedUser,
-} from '../redux/reducers/usersSlice';
+} from '../redux/usersSlice';
 function UserManagement() {
     // const [users, setUsers] = useState([]);
 	const dispatch = useDispatch();

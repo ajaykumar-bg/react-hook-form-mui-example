@@ -8,8 +8,8 @@ import usersReducer, {
 	createUserRequest,
 	updateUserRequest,
 	deleteUserRequest,
-} from '../../features/users/usersSlice';
-import { usersSaga } from '../../features/users/usersSaga';
+} from '../redux/reducers/usersSlice';
+import { usersSaga } from '../redux/sagas/usersSagas';
 
 // Mock server setup
 const mockUsers = [

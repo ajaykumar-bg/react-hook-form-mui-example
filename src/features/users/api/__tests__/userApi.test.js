@@ -7,54 +7,42 @@ import {
 	updateUser,
 	deleteUser,
 } from '../userApi';
+import { mockUsersAPIUrl, mockUsers } from '../redux/__tests__/users.mock';
 
 // Mock server setup
-const mockUsers = [
-	{ id: 1, name: 'John Doe', email: 'john@example.com' },
-	{ id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-];
 
 const server = setupServer(
 	// GET all users
-	rest.get('https://jsonplaceholder.typicode.com/users', (req, res, ctx) => {
+	rest.get(`${mockUsersAPIUrl}`, (req, res, ctx) => {
 		return res(ctx.json(mockUsers));
 	}),
 
 	// GET single user
-	rest.get(
-		'https://jsonplaceholder.typicode.com/users/:id',
-		(req, res, ctx) => {
-			const { id } = req.params;
-			const user = mockUsers.find((user) => user.id === Number(id));
-			return user
-				? res(ctx.json(user))
-				: res(ctx.status(404), ctx.json({ message: 'User not found' }));
-		}
-	),
+	rest.get(`${mockUsersAPIUrl}/:id`, (req, res, ctx) => {
+		const { id } = req.params;
+		const user = mockUsers.find((user) => user.id === Number(id));
+		return user
+			? res(ctx.json(user))
+			: res(ctx.status(404), ctx.json({ message: 'User not found' }));
+	}),
 
 	// POST new user
-	rest.post('https://jsonplaceholder.typicode.com/users', (req, res, ctx) => {
+	rest.post(`${mockUsersAPIUrl}`, (req, res, ctx) => {
 		const newUser = { id: 3, ...req.body };
 		return res(ctx.status(201), ctx.json(newUser));
 	}),
 
 	// PUT update user
-	rest.put(
-		'https://jsonplaceholder.typicode.com/users/:id',
-		(req, res, ctx) => {
-			const { id } = req.params;
-			const updatedUser = { id: Number(id), ...req.body };
-			return res(ctx.json(updatedUser));
-		}
-	),
+	rest.put(`${mockUsersAPIUrl}/:id`, (req, res, ctx) => {
+		const { id } = req.params;
+		const updatedUser = { id: Number(id), ...req.body };
+		return res(ctx.json(updatedUser));
+	}),
 
 	// DELETE user
-	rest.delete(
-		'https://jsonplaceholder.typicode.com/users/:id',
-		(req, res, ctx) => {
-			return res(ctx.status(200), ctx.json({}));
-		}
-	)
+	rest.delete(`${mockUsersAPIUrl}/:id`, (req, res, ctx) => {
+		return res(ctx.status(200), ctx.json({}));
+	})
 );
 
 // Enable API mocking before tests

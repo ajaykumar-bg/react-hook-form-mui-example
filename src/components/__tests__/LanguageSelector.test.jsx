@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
-import LanguageSelector from './LanguageSelector';
-import { Select } from '@mui/material';
+import LanguageSelector from '../LanguageSelector';
 
 // Mock the react-i18next hooks
 jest.mock('react-i18next', () => ({
