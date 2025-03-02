@@ -1,157 +1,191 @@
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import {
 	fetchUsers,
 	fetchUserById,
 	createUser,
 	updateUser,
 	deleteUser,
-} from '../userApi';
-import { mockUsersAPIUrl, mockUsers } from '../../__tests__/users.mock';
+} from '../path/to/user-api'; // Adjust the import path as needed
+import fetchMock from 'fetch-mock';
+import { API_URL } from '../../../constants';
 
-// Mock server setup
+// Mock data
+const mockUsers = [
+	{ id: 1, name: 'John Doe', email: 'john@example.com' },
+	{ id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+];
 
-const server = setupServer(
-	// GET all users
-	rest.get(`${mockUsersAPIUrl}`, (req, res, ctx) => {
-		return res(ctx.json(mockUsers));
-	}),
+const newUser = { name: 'New User', email: 'new@example.com' };
+const createdUser = { id: 3, ...newUser };
 
-	// GET single user
-	rest.get(`${mockUsersAPIUrl}/:id`, (req, res, ctx) => {
-		const { id } = req.params;
-		const user = mockUsers.find((user) => user.id === Number(id));
-		return user
-			? res(ctx.json(user))
-			: res(ctx.status(404), ctx.json({ message: 'User not found' }));
-	}),
+const updatedUserData = { name: 'Updated Name', email: 'updated@example.com' };
+const updatedUser = { id: 1, ...updatedUserData };
 
-	// POST new user
-	rest.post(`${mockUsersAPIUrl}`, (req, res, ctx) => {
-		const newUser = { id: 3, ...req.body };
-		return res(ctx.status(201), ctx.json(newUser));
-	}),
-
-	// PUT update user
-	rest.put(`${mockUsersAPIUrl}/:id`, (req, res, ctx) => {
-		const { id } = req.params;
-		const updatedUser = { id: Number(id), ...req.body };
-		return res(ctx.json(updatedUser));
-	}),
-
-	// DELETE user
-	rest.delete(`${mockUsersAPIUrl}/:id`, (req, res, ctx) => {
-		return res(ctx.status(200), ctx.json({}));
-	})
-);
-
-// Enable API mocking before tests
-beforeAll(() => server.listen());
-// Reset any request handlers that we may add during the tests
-afterEach(() => server.resetHandlers());
-// Disable API mocking after the tests are done
-afterAll(() => server.close());
-
-describe('userApi', () => {
-	test('fetchUsers should return all users', async () => {
-		const users = await fetchUsers();
-		expect(users).toEqual(mockUsers);
-		expect(users.length).toBe(2);
+describe('User API', () => {
+	afterEach(() => {
+		fetchMock.restore();
 	});
 
-	test('fetchUserById should return a single user', async () => {
-		const user = await fetchUserById(1);
-		expect(user).toEqual(mockUsers[0]);
-	});
+	describe('fetchUsers', () => {
+		it('should fetch all users successfully', async () => {
+			fetchMock.getOnce(`${API_URL}/users`, {
+				status: 200,
+				body: mockUsers,
+			});
 
-	test('fetchUserById should throw an error if user not found', async () => {
-		server.use(
-			rest.get(
-				'https://jsonplaceholder.typicode.com/users/999',
-				(req, res, ctx) => {
-					return res(ctx.status(404), ctx.json({ message: 'User not found' }));
-				}
-			)
-		);
+			const result = await fetchUsers();
 
-		await expect(fetchUserById(999)).rejects.toThrow(
-			'Failed to fetch user with id 999'
-		);
-	});
+			expect(result).toEqual(mockUsers);
+			expect(fetchMock.called()).toBe(true);
+		});
 
-	test('createUser should create and return a new user', async () => {
-		const newUserData = { name: 'Bob Johnson', email: 'bob@example.com' };
-		const createdUser = await createUser(newUserData);
+		it('should throw an error when fetch fails', async () => {
+			fetchMock.getOnce(`${API_URL}/users`, {
+				status: 500,
+				body: { message: 'Server error' },
+			});
 
-		expect(createdUser).toEqual({
-			id: 3,
-			...newUserData,
+			await expect(fetchUsers()).rejects.toThrow('Failed to fetch users');
 		});
 	});
 
-	test('updateUser should update and return the user', async () => {
-		const updatedData = {
-			name: 'John Updated',
-			email: 'john.updated@example.com',
-		};
-		const updatedUser = await updateUser(1, updatedData);
+	describe('fetchUserById', () => {
+		it('should fetch a user by id successfully', async () => {
+			const userId = 1;
+			const user = mockUsers.find((u) => u.id === userId);
 
-		expect(updatedUser).toEqual({
-			id: 1,
-			...updatedData,
+			fetchMock.getOnce(`${API_URL}/users/${userId}`, {
+				status: 200,
+				body: user,
+			});
+
+			const result = await fetchUserById(userId);
+
+			expect(result).toEqual(user);
+			expect(fetchMock.called()).toBe(true);
+		});
+
+		it('should throw an error when user is not found', async () => {
+			const userId = 999;
+
+			fetchMock.getOnce(`${API_URL}/users/${userId}`, {
+				status: 404,
+				body: { message: 'User not found' },
+			});
+
+			await expect(fetchUserById(userId)).rejects.toThrow(
+				`Failed to fetch user with id ${userId}`
+			);
 		});
 	});
 
-	test('deleteUser should delete a user and return the id', async () => {
-		const result = await deleteUser(1);
-		expect(result).toBe(1);
+	describe('createUser', () => {
+		it('should create a user successfully', async () => {
+			fetchMock.postOnce(
+				`${API_URL}/users`,
+				{
+					status: 201,
+					body: createdUser,
+				},
+				{
+					body: JSON.stringify(newUser),
+				}
+			);
+
+			const result = await createUser(newUser);
+
+			expect(result).toEqual(createdUser);
+			expect(fetchMock.called()).toBe(true);
+			expect(fetchMock.lastOptions().headers['Content-Type']).toBe(
+				'application/json'
+			);
+			expect(fetchMock.lastOptions().body).toBe(JSON.stringify(newUser));
+		});
+
+		it('should throw an error when creation fails', async () => {
+			fetchMock.postOnce(
+				`${API_URL}/users`,
+				{
+					status: 400,
+					body: { message: 'Invalid user data' },
+				},
+				{
+					body: JSON.stringify({ invalid: 'data' }),
+				}
+			);
+
+			await expect(createUser({ invalid: 'data' })).rejects.toThrow(
+				'Failed to create user'
+			);
+		});
 	});
 
-	test('API calls should handle errors properly', async () => {
-		// Mock server error for all endpoints
-		server.use(
-			rest.get(
-				'https://jsonplaceholder.typicode.com/users',
-				(req, res, ctx) => {
-					return res(ctx.status(500));
-				}
-			),
-			rest.get(
-				'https://jsonplaceholder.typicode.com/users/:id',
-				(req, res, ctx) => {
-					return res(ctx.status(500));
-				}
-			),
-			rest.post(
-				'https://jsonplaceholder.typicode.com/users',
-				(req, res, ctx) => {
-					return res(ctx.status(500));
-				}
-			),
-			rest.put(
-				'https://jsonplaceholder.typicode.com/users/:id',
-				(req, res, ctx) => {
-					return res(ctx.status(500));
-				}
-			),
-			rest.delete(
-				'https://jsonplaceholder.typicode.com/users/:id',
-				(req, res, ctx) => {
-					return res(ctx.status(500));
-				}
-			)
-		);
+	describe('updateUser', () => {
+		it('should update a user successfully', async () => {
+			const userId = 1;
 
-		await expect(fetchUsers()).rejects.toThrow('Failed to fetch users');
-		await expect(fetchUserById(1)).rejects.toThrow(
-			'Failed to fetch user with id 1'
-		);
-		await expect(createUser({})).rejects.toThrow('Failed to create user');
-		await expect(updateUser(1, {})).rejects.toThrow(
-			'Failed to update user with id 1'
-		);
-		await expect(deleteUser(1)).rejects.toThrow(
-			'Failed to delete user with id 1'
-		);
+			fetchMock.putOnce(
+				`${API_URL}/users/${userId}`,
+				{
+					status: 200,
+					body: updatedUser,
+				},
+				{
+					body: JSON.stringify(updatedUserData),
+				}
+			);
+
+			const result = await updateUser(userId, updatedUserData);
+
+			expect(result).toEqual(updatedUser);
+			expect(fetchMock.called()).toBe(true);
+			expect(fetchMock.lastOptions().headers['Content-Type']).toBe(
+				'application/json'
+			);
+			expect(fetchMock.lastOptions().body).toBe(
+				JSON.stringify(updatedUserData)
+			);
+		});
+
+		it('should throw an error when update fails', async () => {
+			const userId = 999;
+
+			fetchMock.putOnce(`${API_URL}/users/${userId}`, {
+				status: 404,
+				body: { message: 'User not found' },
+			});
+
+			await expect(updateUser(userId, updatedUserData)).rejects.toThrow(
+				`Failed to update user with id ${userId}`
+			);
+		});
+	});
+
+	describe('deleteUser', () => {
+		it('should delete a user successfully', async () => {
+			const userId = 1;
+
+			fetchMock.deleteOnce(`${API_URL}/users/${userId}`, {
+				status: 200,
+				body: { message: 'User deleted' },
+			});
+
+			const result = await deleteUser(userId);
+
+			expect(result).toEqual(userId);
+			expect(fetchMock.called()).toBe(true);
+		});
+
+		it('should throw an error when deletion fails', async () => {
+			const userId = 999;
+
+			fetchMock.deleteOnce(`${API_URL}/users/${userId}`, {
+				status: 404,
+				body: { message: 'User not found' },
+			});
+
+			await expect(deleteUser(userId)).rejects.toThrow(
+				`Failed to delete user with id ${userId}`
+			);
+		});
 	});
 });
