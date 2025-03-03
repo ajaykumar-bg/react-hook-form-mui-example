@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,6 +13,7 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import SideMenuMobile from '../components/SideMenuMobile';
 import MenuButton from '../components/MenuButton';
 import ColorModeIconDropdown from '../theme/ColorModeIconDropdown';
+import { getAppRoutes } from '../../constants/route.constants';
 
 const Toolbar = styled(MuiToolbar)({
 	width: '100%',
@@ -31,6 +33,9 @@ const Toolbar = styled(MuiToolbar)({
 
 function AppNavbar() {
 	const [open, setOpen] = React.useState(false);
+	const appRoutes = useMemo(() => getAppRoutes(), []);
+	const location = useLocation();
+	const currentRoute = appRoutes.find((r) => r.path === location.pathname);
 
 	const toggleDrawer = (newOpen) => () => {
 		setOpen(newOpen);
@@ -70,7 +75,7 @@ function AppNavbar() {
 							component='h1'
 							sx={{ color: 'text.primary' }}
 						>
-							Dashboard
+							{currentRoute?.label}
 						</Typography>
 					</Stack>
 					<ColorModeIconDropdown />

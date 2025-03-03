@@ -42,5 +42,14 @@
 		"language": "Language",
 		"english": "English",
 		"spanish": "Spanish"
+	},
+	"page": {
+		"home": "Home",
+		"dashboard": "Dashboard",
+		"login": "Login",
+		"register": "Register",
+		"users": "Users",
+		"settings": "Settings",
+		"about": "About"
 	}
 }

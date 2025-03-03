@@ -42,5 +42,14 @@
 		"language": "Idioma",
 		"english": "Inglés",
 		"spanish": "Español"
+	},
+	"page": {
+		"home": "Hogar",
+		"dashboard": "Panel",
+		"login": "Acceso",
+		"register": "Registro",
+		"users": "Usuarias",
+		"settings": "Ajustes",
+		"about": "Acerca de"
 	}
 }
