@@ -34,8 +34,6 @@ function MenuContent() {
 	const appRoutes = useMemo(() => getAppRoutes(), []);
 	const location = useLocation();
 	const currentRoute = appRoutes.find((r) => r.path === location.pathname);
-	console.log('location.pathname', location.pathname);
-	console.log('currentRoute?.path', currentRoute?.path);
 
 	const navigate = useNavigate();
 	const onMenuClick = (path) => {
