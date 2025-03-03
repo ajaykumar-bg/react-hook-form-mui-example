@@ -20,6 +20,8 @@ import UserManagement from './features/users/components/UserManagement';
 import Settings from './components/Settings';
 import About from './components/About';
 import Contact from './components/Contact';
+import Profile from './components/Profile';
+import Account from './components/Account';
 
 const App = () => {
 	return (
@@ -74,6 +76,26 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<Contact />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/profile'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<Profile />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/account'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<Account />
 								</AppLayout>
 							</ProtectedRoute>
 						}

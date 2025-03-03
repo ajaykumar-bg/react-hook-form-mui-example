@@ -51,6 +51,8 @@
 		"users": "Users",
 		"settings": "Settings",
 		"about": "About",
-		"contact": "Contact"
+		"contact": "Contact",
+		"profile": "Profile",
+		"account": "Account"
 	}
 }
