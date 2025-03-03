@@ -13,7 +13,7 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 // import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
-// import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 
 import { getAppRoutes } from '../../constants/route.constants';
 
@@ -27,7 +27,7 @@ const mainListItems = [
 const secondaryListItems = [
 	{ text: 'Settings', icon: <SettingsRoundedIcon />, path: '/settings' },
 	{ text: 'About', icon: <InfoRoundedIcon />, path: '/about' },
-	// { text: 'Feedback', icon: <HelpRoundedIcon /> },
+	{ text: 'Contact', icon: <HelpRoundedIcon />, path: '/contact' },
 ];
 
 function MenuContent() {

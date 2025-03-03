@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 
 import { store } from './redux/store';
-// import ResponsiveDrawer from './components/ResponsiveDrawer';
 
 import Login from './features/auth/components/MuiLogin';
 import Register from './features/auth/components/MuiRegister';
@@ -20,6 +19,7 @@ import MainGrid from './layout/components/MainGrid';
 import UserManagement from './features/users/components/UserManagement';
 import Settings from './components/Settings';
 import About from './components/About';
+import Contact from './components/Contact';
 
 const App = () => {
 	return (
@@ -64,6 +64,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<About />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/contact'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<Contact />
 								</AppLayout>
 							</ProtectedRoute>
 						}

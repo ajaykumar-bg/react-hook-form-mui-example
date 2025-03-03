@@ -29,4 +29,8 @@ export const getAppRoutes = () => [
 		label: <Trans i18nKey='page.about' />,
 		path: '/about',
 	},
+	{
+		label: <Trans i18nKey='page.contact' />,
+		path: '/contact',
+	},
 ];
