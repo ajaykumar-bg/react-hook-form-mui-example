@@ -18,7 +18,7 @@ import {
 	updateUserFailure,
 	deleteUserSuccess,
 	deleteUserFailure,
-} from '../usersActions';
+} from '../usersSlice';
 import * as api from '../../api/userApi';
 import { takeLatest } from 'redux-saga/effects';
 

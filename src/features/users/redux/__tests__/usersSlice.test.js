@@ -18,7 +18,7 @@ import usersReducer, {
 	clearSelectedUser,
 } from '../usersSlice';
 
-import { mockUsers, mockUser } from '../../../__tests__/users.mock';
+import { mockUsers } from '../../__tests__/users.mock';
 
 describe('usersSlice', () => {
 	const initialState = {
