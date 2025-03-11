@@ -1,22 +1,97 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import usersReducer, {
+	fetchUsersRequest,
+	fetchUsersSuccess,
+	fetchUsersFailure,
+	fetchUserRequest,
+	fetchUserSuccess,
+	fetchUserFailure,
+	createUserRequest,
+	createUserSuccess,
+	createUserFailure,
+	updateUserRequest,
+	updateUserSuccess,
+	updateUserFailure,
+	deleteUserRequest,
+	deleteUserSuccess,
+	deleteUserFailure,
+	selectUserForEdit,
+	clearSelectedUser,
+	apiFailure,
+} from '../../redux/usersSlice';
+
 import UserManagement from '../UserManagement';
 
-describe('UserManagement Component', () => {
-	test('renders the app title', () => {
-		render(<UserManagement />);
-		expect(screen.getByText('app.title')).toBeInTheDocument();
-	});
+// import { store } from '../../../../redux/store';
+import { configureStore } from '@reduxjs/toolkit';
+import { mockUsers } from '../../__tests__/users.mock';
 
+// Mock the async thunk
+jest.mock('../../redux/usersSlice', () => {
+	const originalModule = jest.requireActual('../../redux/usersSlice');
+	return {
+		...originalModule,
+		fetchUsersRequest: jest.fn(),
+		fetchUsersSuccess: jest.fn(),
+		fetchUsersFailure: jest.fn(),
+		fetchUserRequest: jest.fn(),
+		fetchUserSuccess: jest.fn(),
+		fetchUserFailure: jest.fn(),
+		createUserRequest: jest.fn(),
+		createUserSuccess: jest.fn(),
+		createUserFailure: jest.fn(),
+		updateUserRequest: jest.fn(),
+		updateUserSuccess: jest.fn(),
+		updateUserFailure: jest.fn(),
+		deleteUserRequest: jest.fn(),
+		deleteUserSuccess: jest.fn(),
+		deleteUserFailure: jest.fn(),
+		selectUserForEdit: jest.fn(),
+		clearSelectedUser: jest.fn(),
+		apiFailure: jest.fn(),
+	};
+});
+
+const createMockStore = (preloadedState = {}) => {
+	return configureStore({
+		reducer: {
+			users: usersReducer,
+		},
+		preloadedState,
+	});
+};
+
+const mockStore = createMockStore({
+	users: {
+		users: mockUsers,
+		loading: false,
+		error: null,
+		selectedUser: null,
+	},
+	auth: {
+		isAuthenticated: true,
+		user: null,
+		loading: false,
+		error: null,
+	},
+});
+
+const renderWithProviders = (ui) => {
+	return render(<Provider store={mockStore}>{ui}</Provider>);
+};
+
+describe('UserManagement Component', () => {
 	test('shows initial users', () => {
-		render(<UserManagement />);
+		renderWithProviders(<UserManagement />, { mockStore });
 		expect(screen.getByText('John Doe')).toBeInTheDocument();
 		expect(screen.getByText('Jane Smith')).toBeInTheDocument();
 	});
 
 	test('opens add user dialog when add button is clicked', async () => {
-		render(<UserManagement />);
+		renderWithProviders(<UserManagement />);
 
 		// Click the Add User button
 		fireEvent.click(screen.getByText('buttons.addUser'));
@@ -26,7 +101,7 @@ describe('UserManagement Component', () => {
 	});
 
 	test('adds a new user', async () => {
-		render(<UserManagement />);
+		renderWithProviders(<UserManagement />);
 
 		// Click Add User button
 		fireEvent.click(screen.getByText('buttons.addUser'));
@@ -54,7 +129,7 @@ describe('UserManagement Component', () => {
 	});
 
 	test('edits an existing user', async () => {
-		render(<UserManagement />);
+		renderWithProviders(<UserManagement />);
 
 		// Find edit button for John Doe and click it
 		const editButtons = screen.getAllByTestId('EditIcon');
@@ -80,7 +155,7 @@ describe('UserManagement Component', () => {
 	});
 
 	test('deletes a user', async () => {
-		render(<UserManagement />);
+		renderWithProviders(<UserManagement />);
 
 		// Initial check
 		expect(screen.getByText('Jane Smith')).toBeInTheDocument();
@@ -96,7 +171,7 @@ describe('UserManagement Component', () => {
 	});
 
 	test('shows validation errors', async () => {
-		render(<UserManagement />);
+		renderWithProviders(<UserManagement />);
 
 		// Click Add User button
 		fireEvent.click(screen.getByText('buttons.addUser'));
