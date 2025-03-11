@@ -12,6 +12,7 @@ import AppLayout from './layout/AppLayout';
 
 import MainGrid from './layout/components/MainGrid';
 import UserManagement from './features/users/components/UserManagement';
+import ExerciseApp from './features/exercises/components/ExerciseApp';
 import Settings from './components/Settings';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -41,6 +42,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<UserManagement />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/exercises'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<ExerciseApp />
 								</AppLayout>
 							</ProtectedRoute>
 						}

@@ -22,6 +22,10 @@ export const getAppRoutes = () => [
 		path: '/users',
 	},
 	{
+		label: <Trans i18nKey='page.exercises' />,
+		path: '/exercises',
+	},
+	{
 		label: <Trans i18nKey='page.settings' />,
 		path: '/settings',
 	},
