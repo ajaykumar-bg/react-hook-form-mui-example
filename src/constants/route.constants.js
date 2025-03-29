@@ -10,6 +10,10 @@ export const getAppRoutes = () => [
 		path: '/dashboard',
 	},
 	{
+		label: <Trans i18nKey='page.charts' />,
+		path: '/charts',
+	},
+	{
 		label: <Trans i18nKey='page.login' />,
 		path: '/login',
 	},

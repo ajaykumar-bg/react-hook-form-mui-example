@@ -15,6 +15,7 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 
 import { getAppRoutes } from '../../constants/route.constants';
 
@@ -22,6 +23,7 @@ const mainListItems = [
 	{ text: 'Home', icon: <HomeRoundedIcon />, path: '/dashboard' },
 	{ text: 'Users', icon: <PeopleRoundedIcon />, path: '/users' },
 	{ text: 'Exercises', icon: <FitnessCenterIcon />, path: '/exercises' },
+	{ text: 'Charts', icon: <ShowChartIcon />, path: '/charts' },
 	// { text: 'Tasks', icon: <AssignmentRoundedIcon /> },
 ];
 
