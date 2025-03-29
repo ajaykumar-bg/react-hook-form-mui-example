@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AppLayout from './layout/AppLayout';
 
 import MainGrid from './layout/components/MainGrid';
+import DashboardCharts from './features/charts/components/DashboardCharts';
 import UserManagement from './features/users/components/UserManagement';
 import ExerciseApp from './features/exercises/components/ExerciseApp';
 import Settings from './components/Settings';
@@ -32,6 +33,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<MainGrid />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/charts'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<DashboardCharts />
 								</AppLayout>
 							</ProtectedRoute>
 						}

@@ -46,6 +46,7 @@
 	"page": {
 		"home": "Home",
 		"dashboard": "Dashboard",
+		"charts": "Charts",
 		"login": "Login",
 		"register": "Register",
 		"users": "Users",
