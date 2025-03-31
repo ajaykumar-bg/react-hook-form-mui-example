@@ -139,12 +139,79 @@ export const muscles = [
 	'Arms',
 	'Core',
 ];
-export const equipments = [
-	'All',
-	'Barbell',
-	'Dumbbell',
-	'Body Weight',
-	'Machine',
-	'Cable',
+
+export const equipmentTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Machine',
+		value: 'machine',
+	},
+	{
+		label: 'Barbell',
+		value: 'barbell',
+	},
+	{
+		label: 'Dumbbell',
+		value: 'dumbbell',
+	},
+	{
+		label: 'Cable',
+		value: 'cable',
+	},
+	{
+		label: 'e-z Curl bar',
+		value: 'e-z curl bar',
+	},
+	{
+		label: 'Kettlebells',
+		value: 'kettlebells',
+	},
+	{
+		label: 'Bands',
+		value: 'bands',
+	},
+	{
+		label: 'Medicine ball',
+		value: 'medicine ball',
+	},
+	{
+		label: 'Exercise ball',
+		value: 'exercise ball',
+	},
+	{
+		label: 'Body Weight',
+		value: 'body only',
+	},
+	{
+		label: 'Foam roll',
+		value: 'foam roll',
+	},
+	{
+		label: 'Other',
+		value: 'other',
+	},
 ];
-export const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+
+export const forces = ['All', 'push', 'pull', 'static'];
+
+export const difficultyLevels = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Beginner',
+		value: 'beginner',
+	},
+	{
+		label: 'Intermediate',
+		value: 'intermediate',
+	},
+	{
+		label: 'Expert',
+		value: 'expert',
+	},
+];

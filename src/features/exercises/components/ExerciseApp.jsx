@@ -15,8 +15,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 import {
-	difficulties,
-	equipments,
+	difficultyLevels,
+	equipmentTypes,
 	// exercisesData,
 	muscles,
 } from '../constants/exercisesApp.mock';
@@ -33,6 +33,7 @@ const ExerciseApp = () => {
 		difficulty: '',
 		searchQuery: '',
 	});
+
 	const [selectedExercise, setSelectedExercise] = useState(null);
 	const [detailsOpen, setDetailsOpen] = useState(false);
 	const [activeStep, setActiveStep] = useState(0);
@@ -75,7 +76,7 @@ const ExerciseApp = () => {
 		// Filter by difficulty
 		if (filters.difficulty && filters.difficulty !== 'All') {
 			filteredExercises = filteredExercises.filter(
-				(exercise) => exercise.difficulty === filters.difficulty
+				(exercise) => exercise.level === filters.difficulty
 			);
 		}
 
@@ -175,9 +176,9 @@ const ExerciseApp = () => {
 								label='Equipment'
 								onChange={handleFilterChange}
 							>
-								{equipments.map((item) => (
-									<MenuItem key={item} value={item}>
-										{item}
+								{equipmentTypes.map((item) => (
+									<MenuItem key={item.value} value={item.value}>
+										{item.label}
 									</MenuItem>
 								))}
 							</Select>
@@ -195,9 +196,9 @@ const ExerciseApp = () => {
 								label='Difficulty'
 								onChange={handleFilterChange}
 							>
-								{difficulties.map((difficulty) => (
-									<MenuItem key={difficulty} value={difficulty}>
-										{difficulty}
+								{difficultyLevels.map((difficulty) => (
+									<MenuItem key={difficulty.value} value={difficulty.value}>
+										{difficulty.label}
 									</MenuItem>
 								))}
 							</Select>

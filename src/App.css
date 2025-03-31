@@ -2,3 +2,7 @@
   text-decoration: none;
   color: #FFF
 }
+
+.MuiChip-label {
+  text-transform: capitalize;
+}
