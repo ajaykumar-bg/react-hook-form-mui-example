@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
 	Typography,
 	Box,
@@ -24,6 +24,13 @@ function ExerciseDetail(props) {
 		handleNext,
 		handleBack,
 	} = props;
+	const images = useMemo(() => {
+		let name = selectedExercise?.name.replace(/ /g, '_');
+		name = name?.replace('/', '_');
+		const imagePath1 = `/exercises-data/${name}/images/0.jpg`;
+		const imagePath2 = `/exercises-data/${name}/images/1.jpg`;
+		return [imagePath1, imagePath2];
+	}, [selectedExercise?.name]);
 	return (
 		<Drawer
 			anchor='right'
@@ -65,12 +72,12 @@ function ExerciseDetail(props) {
 									width: '100%',
 									objectFit: 'cover',
 								}}
-								src={selectedExercise.images[activeStep]}
+								src={images[activeStep]}
 								alt={`${selectedExercise.name} - image ${activeStep + 1}`}
 							/>
 							<MobileStepper
 								variant='dots'
-								steps={selectedExercise.images.length}
+								steps={images.length}
 								position='static'
 								activeStep={activeStep}
 								sx={{ flexGrow: 1 }}
@@ -78,7 +85,7 @@ function ExerciseDetail(props) {
 									<Button
 										size='small'
 										onClick={handleNext}
-										disabled={activeStep === selectedExercise.images.length - 1}
+										disabled={activeStep === images.length - 1}
 									>
 										Next
 										<KeyboardArrowRight />
@@ -100,9 +107,12 @@ function ExerciseDetail(props) {
 
 					<Box sx={{ p: 3 }}>
 						<Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-							<Chip label={selectedExercise.muscle} color='primary' />
+							<Chip
+								label={selectedExercise.primaryMuscles[0]}
+								color='primary'
+							/>
 							<Chip label={selectedExercise.equipment} color='secondary' />
-							<Chip label={selectedExercise.difficulty} />
+							<Chip label={selectedExercise.level} />
 						</Box>
 
 						<Typography variant='h6' gutterBottom>

@@ -17,15 +17,16 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import {
 	difficulties,
 	equipments,
-	exercisesData,
+	// exercisesData,
 	muscles,
 } from '../constants/exercisesApp.mock';
+import exercisesData from '../constants/exercises.json';
 import Exercise from './Exercise';
 import ExerciseDetail from './ExerciseDetail';
 
 // Main App Component
 const ExerciseApp = () => {
-	const [exercises, setExercises] = useState(exercisesData);
+	const [exercises, setExercises] = useState(exercisesData?.exercises);
 	const [filters, setFilters] = useState({
 		muscle: '',
 		equipment: '',
@@ -55,7 +56,7 @@ const ExerciseApp = () => {
 
 	// Apply filters
 	useEffect(() => {
-		let filteredExercises = [...exercisesData];
+		let filteredExercises = [...exercisesData?.exercises];
 
 		// Filter by muscle
 		if (filters.muscle && filters.muscle !== 'All') {
@@ -210,7 +211,7 @@ const ExerciseApp = () => {
 				{exercises.length > 0 ? (
 					exercises.map((exercise) => (
 						<Exercise
-							key={exercise.id}
+							key={exercise.name}
 							exercise={exercise}
 							onOpenDetails={openExerciseDetails}
 						/>

@@ -19,6 +19,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Profile from './components/Profile';
 import Account from './components/Account';
+import MutualFundGrowthChart from './features/funds/components/MutualFundGrowth';
 
 const App = () => {
 	return (
@@ -43,6 +44,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<DashboardCharts />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/mutual-funds'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<MutualFundGrowthChart />
 								</AppLayout>
 							</ProtectedRoute>
 						}
