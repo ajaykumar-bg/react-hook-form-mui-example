@@ -113,6 +113,17 @@ function ExerciseDetail(props) {
 							/>
 							<Chip label={selectedExercise.equipment} color='secondary' />
 							<Chip label={selectedExercise.level} />
+							<Chip
+								label={selectedExercise.category}
+								color='error'
+								size='small'
+							/>
+							<Chip label={selectedExercise.force} color='info' size='small' />
+							<Chip
+								label={selectedExercise.mechanic}
+								color='success'
+								size='small'
+							/>
 						</Box>
 
 						<Typography variant='h6' gutterBottom>

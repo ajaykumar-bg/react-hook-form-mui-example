@@ -52,6 +52,10 @@ function Exercise(props) {
 						/>
 						<Chip label={exercise.equipment} color='secondary' size='small' />
 						<Chip label={exercise.level} color='default' size='small' />
+
+						<Chip label={exercise.category} color='error' size='small' />
+						<Chip label={exercise.force} color='info' size='small' />
+						<Chip label={exercise.mechanic} color='success' size='small' />
 					</Box>
 					<Typography variant='body2' color='text.secondary'>
 						{exercise.description?.substring(0, 120)}...

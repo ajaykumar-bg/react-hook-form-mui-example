@@ -1,28 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import {
-	Container,
-	Grid,
-	Typography,
-	FormControl,
-	InputLabel,
-	Select,
-	MenuItem,
-	TextField,
-	Button,
-	Paper,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Container, Typography } from '@mui/material';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-
-import {
-	difficultyLevels,
-	equipmentTypes,
-	// exercisesData,
-	muscles,
-} from '../constants/exercisesApp.mock';
 import exercisesData from '../constants/exercises.json';
-import Exercise from './Exercise';
+
 import ExerciseDetail from './ExerciseDetail';
+import SearchFilters from './SearchFilters';
+import ExerciseList from './ExerciseList';
 
 // Main App Component
 const ExerciseApp = () => {
@@ -30,6 +13,8 @@ const ExerciseApp = () => {
 	const [filters, setFilters] = useState({
 		muscle: '',
 		equipment: '',
+		category: '',
+		force: '',
 		difficulty: '',
 		searchQuery: '',
 	});
@@ -55,14 +40,25 @@ const ExerciseApp = () => {
 		});
 	};
 
+	const clearFilters = () => {
+		setFilters({
+			muscle: '',
+			equipment: '',
+			category: '',
+			force: '',
+			difficulty: '',
+			searchQuery: '',
+		});
+	};
+
 	// Apply filters
 	useEffect(() => {
 		let filteredExercises = [...exercisesData?.exercises];
 
 		// Filter by muscle
 		if (filters.muscle && filters.muscle !== 'All') {
-			filteredExercises = filteredExercises.filter(
-				(exercise) => exercise.muscle === filters.muscle
+			filteredExercises = filteredExercises.filter((exercise) =>
+				exercise.primaryMuscles.includes(filters.muscle)
 			);
 		}
 
@@ -73,10 +69,24 @@ const ExerciseApp = () => {
 			);
 		}
 
+		// Filter by force
+		if (filters.force && filters.force !== 'All') {
+			filteredExercises = filteredExercises.filter(
+				(exercise) => exercise.force === filters.force
+			);
+		}
+
 		// Filter by difficulty
 		if (filters.difficulty && filters.difficulty !== 'All') {
 			filteredExercises = filteredExercises.filter(
 				(exercise) => exercise.level === filters.difficulty
+			);
+		}
+
+		// Filter by category
+		if (filters.category && filters.category !== 'All') {
+			filteredExercises = filteredExercises.filter(
+				(exercise) => exercise.category === filters.category
 			);
 		}
 
@@ -124,123 +134,17 @@ const ExerciseApp = () => {
 				Gym Exercise Library
 			</Typography>
 
-			{/* Filters Section */}
-			<Paper elevation={3} sx={{ p: 3, mb: 4 }}>
-				<Typography variant='h5' component='h2' gutterBottom>
-					Filters
-				</Typography>
+			<SearchFilters
+				filters={filters}
+				handleSearch={handleSearch}
+				handleFilterChange={handleFilterChange}
+			/>
 
-				<Grid container spacing={3}>
-					<Grid item xs={12} sm={6} md={3}>
-						<TextField
-							fullWidth
-							label='Search Exercises'
-							variant='outlined'
-							name='searchQuery'
-							value={filters.searchQuery}
-							onChange={handleSearch}
-							InputProps={{
-								endAdornment: <SearchIcon position='end' />,
-							}}
-						/>
-					</Grid>
-
-					<Grid item xs={12} sm={6} md={3}>
-						<FormControl fullWidth>
-							<InputLabel id='muscle-label'>Muscle Group</InputLabel>
-							<Select
-								labelId='muscle-label'
-								id='muscle-select'
-								name='muscle'
-								value={filters.muscle}
-								label='Muscle Group'
-								onChange={handleFilterChange}
-							>
-								{muscles.map((muscle) => (
-									<MenuItem key={muscle} value={muscle}>
-										{muscle}
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
-					</Grid>
-
-					<Grid item xs={12} sm={6} md={3}>
-						<FormControl fullWidth>
-							<InputLabel id='equipment-label'>Equipment</InputLabel>
-							<Select
-								labelId='equipment-label'
-								id='equipment-select'
-								name='equipment'
-								value={filters.equipment}
-								label='Equipment'
-								onChange={handleFilterChange}
-							>
-								{equipmentTypes.map((item) => (
-									<MenuItem key={item.value} value={item.value}>
-										{item.label}
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
-					</Grid>
-
-					<Grid item xs={12} sm={6} md={3}>
-						<FormControl fullWidth>
-							<InputLabel id='difficulty-label'>Difficulty</InputLabel>
-							<Select
-								labelId='difficulty-label'
-								id='difficulty-select'
-								name='difficulty'
-								value={filters.difficulty}
-								label='Difficulty'
-								onChange={handleFilterChange}
-							>
-								{difficultyLevels.map((difficulty) => (
-									<MenuItem key={difficulty.value} value={difficulty.value}>
-										{difficulty.label}
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
-					</Grid>
-				</Grid>
-			</Paper>
-
-			{/* Exercise Cards */}
-			<Grid container spacing={3}>
-				{exercises.length > 0 ? (
-					exercises.map((exercise) => (
-						<Exercise
-							key={exercise.name}
-							exercise={exercise}
-							onOpenDetails={openExerciseDetails}
-						/>
-					))
-				) : (
-					<Grid item xs={12}>
-						<Paper sx={{ p: 3, textAlign: 'center' }}>
-							<Typography variant='h6'>
-								No exercises found matching your filters.
-							</Typography>
-							<Button
-								variant='outlined'
-								sx={{ mt: 2 }}
-								onClick={() =>
-									setFilters({
-										muscle: '',
-										equipment: '',
-										difficulty: '',
-										searchQuery: '',
-									})
-								}
-							>
-								Clear Filters
-							</Button>
-						</Paper>
-					</Grid>
-				)}
-			</Grid>
+			<ExerciseList
+				exercises={exercises}
+				openExerciseDetails={openExerciseDetails}
+				clearFilters={clearFilters}
+			/>
 
 			<ExerciseDetail
 				selectedExercise={selectedExercise}

@@ -130,14 +130,114 @@ export const exercisesData = [
 ];
 
 // Filter options
-export const muscles = [
-	'All',
-	'Chest',
-	'Back',
-	'Legs',
-	'Shoulders',
-	'Arms',
-	'Core',
+export const muscleTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Abdominals',
+		value: 'abdominals',
+	},
+	{
+		label: 'Abductors',
+		value: 'abductors',
+	},
+	{
+		label: 'Adductors',
+		value: 'adductors',
+	},
+	{
+		label: 'Biceps',
+		value: 'biceps',
+	},
+	{
+		label: 'Calves',
+		value: 'calves',
+	},
+	{
+		label: 'Chest',
+		value: 'chest',
+	},
+	{
+		label: 'Forearms',
+		value: 'forearms',
+	},
+	{
+		label: 'Glutes',
+		value: 'glutes',
+	},
+	{
+		label: 'Hamstrings',
+		value: 'hamstrings',
+	},
+	{
+		label: 'Lats',
+		value: 'lats',
+	},
+	{
+		label: 'Lower back',
+		value: 'lower back',
+	},
+	{
+		label: 'Middle back',
+		value: 'middle back',
+	},
+	{
+		label: 'Neck',
+		value: 'neck',
+	},
+	{
+		label: 'Quadriceps',
+		value: 'quadriceps',
+	},
+	{
+		label: 'Shoulders',
+		value: 'shoulders',
+	},
+	{
+		label: 'Traps',
+		value: 'traps',
+	},
+	{
+		label: 'Triceps',
+		value: 'triceps',
+	},
+];
+
+export const categoryTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Strength',
+		value: 'strength',
+	},
+	{
+		label: 'Stretching',
+		value: 'stretching',
+	},
+	{
+		label: 'Plyometrics',
+		value: 'plyometrics',
+	},
+	{
+		label: 'Strongman',
+		value: 'strongman',
+	},
+	{
+		label: 'Powerlifting',
+		value: 'powerlifting',
+	},
+	{
+		label: 'cardio',
+		value: 'cardio',
+	},
+	{
+		label: 'Olympic Weightlifting',
+		value: 'olympic weightlifting',
+	},
 ];
 
 export const equipmentTypes = [
@@ -195,7 +295,25 @@ export const equipmentTypes = [
 	},
 ];
 
-export const forces = ['All', 'push', 'pull', 'static'];
+export const forceTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Push',
+		value: 'push',
+	},
+	{
+		label: 'Pull',
+		value: 'pull',
+	},
+
+	{
+		label: 'Static',
+		value: 'static',
+	},
+];
 
 export const difficultyLevels = [
 	{
