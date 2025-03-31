@@ -30,4 +30,4 @@ function ExerciseList(props) {
 	);
 }
 
-export default ExerciseList;
+export default React.memo(ExerciseList);

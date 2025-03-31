@@ -164,4 +164,4 @@ function SearchFilters(props) {
 	);
 }
 
-export default SearchFilters;
+export default React.memo(SearchFilters);

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
 	Typography,
 	Box,
@@ -25,13 +25,6 @@ function ExerciseDetail(props) {
 		handleNext,
 		handleBack,
 	} = props;
-	const images = useMemo(() => {
-		let name = selectedExercise?.name.replace(/ /g, '_');
-		name = name?.replace('/', '_');
-		const imagePath1 = `/exercises-data/${name}/images/0.jpg`;
-		const imagePath2 = `/exercises-data/${name}/images/1.jpg`;
-		return [imagePath1, imagePath2];
-	}, [selectedExercise?.name]);
 	return (
 		<Drawer
 			anchor='right'
@@ -69,17 +62,17 @@ function ExerciseDetail(props) {
 								component='img'
 								loading='lazy'
 								sx={{
-									height: 300,
+									height: '100%',
 									display: 'block',
 									width: '100%',
 									objectFit: 'cover',
 								}}
-								src={images[activeStep]}
+								src={selectedExercise?.images[activeStep]}
 								alt={`${selectedExercise.name} - image ${activeStep + 1}`}
 							/>
 							<MobileStepper
 								variant='dots'
-								steps={images.length}
+								steps={selectedExercise?.images.length}
 								position='static'
 								activeStep={activeStep}
 								sx={{ flexGrow: 1 }}
@@ -87,7 +80,9 @@ function ExerciseDetail(props) {
 									<Button
 										size='small'
 										onClick={handleNext}
-										disabled={activeStep === images.length - 1}
+										disabled={
+											activeStep === selectedExercise?.images.length - 1
+										}
 									>
 										Next
 										<KeyboardArrowRight />
@@ -193,4 +188,4 @@ function ExerciseDetail(props) {
 	);
 }
 
-export default ExerciseDetail;
+export default React.memo(ExerciseDetail);

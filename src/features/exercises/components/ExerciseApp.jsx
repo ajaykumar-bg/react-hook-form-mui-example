@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { AppBar, Box, Typography } from '@mui/material';
 
 import exercisesData from '../constants/exercises.json';
@@ -9,7 +9,7 @@ import ExerciseList from './ExerciseList';
 
 // Main App Component
 const ExerciseApp = () => {
-	const [exercises, setExercises] = useState(exercisesData?.exercises);
+	const [exercises, setExercises] = useState(exercisesData);
 	const [filters, setFilters] = useState({
 		searchQuery: '',
 		muscle: 'All',
@@ -24,23 +24,30 @@ const ExerciseApp = () => {
 	const [activeStep, setActiveStep] = useState(0);
 
 	// Handle filter changes
-	const handleFilterChange = (event) => {
-		const { name, value } = event.target;
-		setFilters({
-			...filters,
-			[name]: value,
-		});
-	};
+
+	const handleFilterChange = useCallback(
+		(event) => {
+			const { name, value } = event.target;
+			setFilters({
+				...filters,
+				[name]: value,
+			});
+		},
+		[filters]
+	);
 
 	// Handle search
-	const handleSearch = (event) => {
-		setFilters({
-			...filters,
-			searchQuery: event.target.value,
-		});
-	};
+	const handleSearch = useCallback(
+		(event) => {
+			setFilters({
+				...filters,
+				searchQuery: event.target.value,
+			});
+		},
+		[filters]
+	);
 
-	const clearFilters = () => {
+	const clearFilters = useCallback(() => {
 		setFilters({
 			searchQuery: '',
 			muscle: 'All',
@@ -49,10 +56,10 @@ const ExerciseApp = () => {
 			force: 'All',
 			difficulty: 'All',
 		});
-	};
+	}, []);
 
-	const applyFilters = () => {
-		let filteredExercises = [...exercisesData?.exercises];
+	const applyFilters = useCallback(() => {
+		let filteredExercises = [...exercisesData];
 
 		// Filter by muscle
 		if (filters.muscle && filters.muscle !== 'All') {
@@ -97,29 +104,29 @@ const ExerciseApp = () => {
 		}
 
 		setExercises(filteredExercises);
-	};
+	}, [filters]);
 
 	// Open exercise details
-	const openExerciseDetails = (exercise) => {
+	const openExerciseDetails = useCallback((exercise) => {
 		setSelectedExercise(exercise);
 		setDetailsOpen(true);
 		setActiveStep(0);
-	};
+	}, []);
 
 	// Close exercise details
-	const closeExerciseDetails = () => {
+	const closeExerciseDetails = useCallback(() => {
 		setDetailsOpen(false);
 		setSelectedExercise(null);
-	};
+	}, []);
 
 	// Handle image navigation
-	const handleNext = () => {
+	const handleNext = useCallback(() => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
-	};
+	}, []);
 
-	const handleBack = () => {
+	const handleBack = useCallback(() => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
-	};
+	}, []);
 
 	return (
 		<Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
@@ -135,8 +142,8 @@ const ExerciseApp = () => {
 				clearFilters={clearFilters}
 			/>
 
-			<Box sx={{ flexGrow: 1, my: 3 }}>
-				<AppBar position='static'>
+			<Box sx={{ flexGrow: 1, marginBottom: 3 }}>
+				<AppBar position='static' sx={{ py: 1 }}>
 					<Typography
 						variant='h6'
 						noWrap
@@ -166,4 +173,4 @@ const ExerciseApp = () => {
 	);
 };
 
-export default ExerciseApp;
+export default React.memo(ExerciseApp);

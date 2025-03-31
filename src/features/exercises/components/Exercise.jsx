@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
 	Grid,
 	Card,
@@ -24,13 +24,6 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 
 function Exercise(props) {
 	const { exercise, onOpenDetails } = props;
-	const images = useMemo(() => {
-		let name = exercise?.name?.replace(/ /g, '_');
-		name = name?.replace('/', '_');
-		const imagePath1 = `/exercises-data/${name}/images/0.jpg`;
-		const imagePath2 = `/exercises-data/${name}/images/1.jpg`;
-		return [imagePath1, imagePath2];
-	}, [exercise?.name]);
 
 	return (
 		<Grid item xs={12} sm={6} md={4} key={exercise.name}>
@@ -50,7 +43,7 @@ function Exercise(props) {
 					component='img'
 					height='200'
 					loading='lazy'
-					image={images[0]}
+					image={exercise?.images[0]}
 					alt={exercise.name}
 				/>
 				<CardContent sx={{ flexGrow: 1 }}>
@@ -121,4 +114,4 @@ function Exercise(props) {
 	);
 }
 
-export default Exercise;
+export default React.memo(Exercise);
