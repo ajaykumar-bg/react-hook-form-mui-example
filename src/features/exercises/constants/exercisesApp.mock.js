@@ -130,21 +130,206 @@ export const exercisesData = [
 ];
 
 // Filter options
-export const muscles = [
-	'All',
-	'Chest',
-	'Back',
-	'Legs',
-	'Shoulders',
-	'Arms',
-	'Core',
+export const muscleTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Abdominals',
+		value: 'abdominals',
+	},
+	{
+		label: 'Abductors',
+		value: 'abductors',
+	},
+	{
+		label: 'Adductors',
+		value: 'adductors',
+	},
+	{
+		label: 'Biceps',
+		value: 'biceps',
+	},
+	{
+		label: 'Calves',
+		value: 'calves',
+	},
+	{
+		label: 'Chest',
+		value: 'chest',
+	},
+	{
+		label: 'Forearms',
+		value: 'forearms',
+	},
+	{
+		label: 'Glutes',
+		value: 'glutes',
+	},
+	{
+		label: 'Hamstrings',
+		value: 'hamstrings',
+	},
+	{
+		label: 'Lats',
+		value: 'lats',
+	},
+	{
+		label: 'Lower back',
+		value: 'lower back',
+	},
+	{
+		label: 'Middle back',
+		value: 'middle back',
+	},
+	{
+		label: 'Neck',
+		value: 'neck',
+	},
+	{
+		label: 'Quadriceps',
+		value: 'quadriceps',
+	},
+	{
+		label: 'Shoulders',
+		value: 'shoulders',
+	},
+	{
+		label: 'Traps',
+		value: 'traps',
+	},
+	{
+		label: 'Triceps',
+		value: 'triceps',
+	},
 ];
-export const equipments = [
-	'All',
-	'Barbell',
-	'Dumbbell',
-	'Body Weight',
-	'Machine',
-	'Cable',
+
+export const categoryTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Strength',
+		value: 'strength',
+	},
+	{
+		label: 'Stretching',
+		value: 'stretching',
+	},
+	{
+		label: 'Plyometrics',
+		value: 'plyometrics',
+	},
+	{
+		label: 'Strongman',
+		value: 'strongman',
+	},
+	{
+		label: 'Powerlifting',
+		value: 'powerlifting',
+	},
+	{
+		label: 'Cardio',
+		value: 'cardio',
+	},
+	{
+		label: 'Olympic Weightlifting',
+		value: 'olympic weightlifting',
+	},
 ];
-export const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+
+export const equipmentTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Machine',
+		value: 'machine',
+	},
+	{
+		label: 'Barbell',
+		value: 'barbell',
+	},
+	{
+		label: 'Dumbbell',
+		value: 'dumbbell',
+	},
+	{
+		label: 'Cable',
+		value: 'cable',
+	},
+	{
+		label: 'e-z Curl bar',
+		value: 'e-z curl bar',
+	},
+	{
+		label: 'Kettlebells',
+		value: 'kettlebells',
+	},
+	{
+		label: 'Bands',
+		value: 'bands',
+	},
+	{
+		label: 'Medicine ball',
+		value: 'medicine ball',
+	},
+	{
+		label: 'Exercise ball',
+		value: 'exercise ball',
+	},
+	{
+		label: 'Body Weight',
+		value: 'body only',
+	},
+	{
+		label: 'Foam roll',
+		value: 'foam roll',
+	},
+	{
+		label: 'Other',
+		value: 'other',
+	},
+];
+
+export const forceTypes = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Push',
+		value: 'push',
+	},
+	{
+		label: 'Pull',
+		value: 'pull',
+	},
+
+	{
+		label: 'Static',
+		value: 'static',
+	},
+];
+
+export const difficultyLevels = [
+	{
+		label: 'All',
+		value: 'All',
+	},
+	{
+		label: 'Beginner',
+		value: 'beginner',
+	},
+	{
+		label: 'Intermediate',
+		value: 'intermediate',
+	},
+	{
+		label: 'Expert',
+		value: 'expert',
+	},
+];
