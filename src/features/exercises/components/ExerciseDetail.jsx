@@ -5,6 +5,7 @@ import {
 	Chip,
 	Button,
 	Drawer,
+	Tooltip,
 	IconButton,
 	AppBar,
 	Toolbar,
@@ -66,6 +67,7 @@ function ExerciseDetail(props) {
 						<Box sx={{ maxWidth: '100%', flexGrow: 1 }}>
 							<Box
 								component='img'
+								loading='lazy'
 								sx={{
 									height: 300,
 									display: 'block',
@@ -107,23 +109,49 @@ function ExerciseDetail(props) {
 
 					<Box sx={{ p: 3 }}>
 						<Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-							<Chip
-								label={selectedExercise.primaryMuscles[0]}
-								color='primary'
-							/>
-							<Chip label={selectedExercise.equipment} color='secondary' />
-							<Chip label={selectedExercise.level} />
-							<Chip
-								label={selectedExercise.category}
-								color='error'
-								size='small'
-							/>
-							<Chip label={selectedExercise.force} color='info' size='small' />
-							<Chip
-								label={selectedExercise.mechanic}
-								color='success'
-								size='small'
-							/>
+							<Tooltip
+								title={`Muscle Groups involved: ${selectedExercise.primaryMuscles.join(
+									','
+								)}`}
+							>
+								<Chip
+									label={selectedExercise.primaryMuscles[0]}
+									color='primary'
+								/>
+							</Tooltip>
+							<Tooltip title='Equipment used'>
+								<Chip
+									label={selectedExercise.equipment || '-'}
+									color='secondary'
+								/>
+							</Tooltip>
+
+							<Tooltip title='Level'>
+								<Chip label={selectedExercise.level} />
+							</Tooltip>
+
+							<Tooltip title='Category'>
+								<Chip
+									label={selectedExercise.category}
+									color='error'
+									size='small'
+								/>
+							</Tooltip>
+
+							<Tooltip title='Force'>
+								<Chip
+									label={selectedExercise.force || '-'}
+									color='info'
+									size='small'
+								/>
+							</Tooltip>
+							<Tooltip title='Mechanic'>
+								<Chip
+									label={selectedExercise.mechanic || '-'}
+									color='success'
+									size='small'
+								/>
+							</Tooltip>
 						</Box>
 
 						<Typography variant='h6' gutterBottom>

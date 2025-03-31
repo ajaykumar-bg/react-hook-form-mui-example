@@ -2,6 +2,8 @@ import React from 'react';
 import {
 	Grid,
 	Typography,
+	Stack,
+	Button,
 	FormControl,
 	InputLabel,
 	Select,
@@ -19,7 +21,13 @@ import {
 } from '../constants/exercisesApp.mock';
 
 function SearchFilters(props) {
-	const { filters, handleSearch, handleFilterChange } = props;
+	const {
+		filters,
+		handleSearch,
+		handleFilterChange,
+		applyFilters,
+		clearFilters,
+	} = props;
 	return (
 		<Paper elevation={3} sx={{ p: 3, mb: 4 }}>
 			<Typography variant='h5' component='h2' gutterBottom>
@@ -139,6 +147,17 @@ function SearchFilters(props) {
 							))}
 						</Select>
 					</FormControl>
+				</Grid>
+
+				<Grid item xs={12} sm={6} md={3}>
+					<Stack spacing={2} direction='row'>
+						<Button variant='contained' onClick={applyFilters}>
+							Search
+						</Button>
+						<Button variant='outlined' onClick={clearFilters}>
+							Clear Filters
+						</Button>
+					</Stack>
 				</Grid>
 			</Grid>
 		</Paper>

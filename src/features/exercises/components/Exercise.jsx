@@ -10,6 +10,18 @@ import {
 	Button,
 } from '@mui/material';
 
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+	<Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+		maxWidth: 220,
+		fontSize: theme.typography.pxToRem(12),
+	},
+}));
+
 function Exercise(props) {
 	const { exercise, onOpenDetails } = props;
 	const images = useMemo(() => {
@@ -37,6 +49,7 @@ function Exercise(props) {
 				<CardMedia
 					component='img'
 					height='200'
+					loading='lazy'
 					image={images[0]}
 					alt={exercise.name}
 				/>
@@ -45,17 +58,50 @@ function Exercise(props) {
 						{exercise.name}
 					</Typography>
 					<Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-						<Chip
-							label={exercise.primaryMuscles[0]}
-							color='primary'
-							size='small'
-						/>
-						<Chip label={exercise.equipment} color='secondary' size='small' />
-						<Chip label={exercise.level} color='default' size='small' />
+						<HtmlTooltip
+							title={
+								<React.Fragment>
+									<Typography color='inherit'>
+										Muscle Groups involved
+									</Typography>
+									<b>{'Primary: '}</b>
+									<em>{exercise.primaryMuscles.join(',')}</em>
+									<br />
+									<b>{'Secondary: '}</b>
+									<em>{exercise.secondaryMuscles.join(',')}</em>
+								</React.Fragment>
+							}
+						>
+							<Chip
+								label={exercise.primaryMuscles[0]}
+								color='primary'
+								size='small'
+							/>
+						</HtmlTooltip>
+						<Tooltip title='Equipment used'>
+							<Chip
+								label={exercise.equipment || '-'}
+								color='secondary'
+								size='small'
+							/>
+						</Tooltip>
+						<Tooltip title='Level'>
+							<Chip label={exercise.level} color='default' size='small' />
+						</Tooltip>
 
-						<Chip label={exercise.category} color='error' size='small' />
-						<Chip label={exercise.force} color='info' size='small' />
-						<Chip label={exercise.mechanic} color='success' size='small' />
+						<Tooltip title='Category'>
+							<Chip label={exercise.category} color='error' size='small' />
+						</Tooltip>
+						<Tooltip title='Force'>
+							<Chip label={exercise.force || '-'} color='info' size='small' />
+						</Tooltip>
+						<Tooltip title='Mechanic'>
+							<Chip
+								label={exercise.mechanic || '-'}
+								color='success'
+								size='small'
+							/>
+						</Tooltip>
 					</Box>
 					<Typography variant='body2' color='text.secondary'>
 						{exercise.description?.substring(0, 120)}...

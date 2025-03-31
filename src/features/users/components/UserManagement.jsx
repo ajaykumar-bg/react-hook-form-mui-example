@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Typography, Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Snackbar, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -86,29 +86,20 @@ function UserManagement() {
 		setSnackbar({ ...snackbar, open: false });
 	};
 	return (
-		<Container>
-			<Box sx={{ my: 4 }}>
-				<Box
-					display='flex'
-					justifyContent='space-between'
-					alignItems='center'
-					mb={2}
-				>
-					<Typography variant='h4' component='h1' gutterBottom>
-						{t('app.title')}
-					</Typography>
-				</Box>
-
-				<Box display='flex' justifyContent='flex-end' mb={2}>
-					<AddUserButton onAddClick={() => handleOpenDialog()} />
-				</Box>
-
-				<UserTable
-					users={users}
-					onEdit={handleOpenDialog}
-					onDelete={handleDeleteUser}
-				/>
+		<Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
+			{/* cards */}
+			<Typography component='h2' variant='h6' sx={{ mb: 2 }}>
+				{t('app.title')}
+			</Typography>
+			<Box display='flex' justifyContent='flex-end' mb={2}>
+				<AddUserButton onAddClick={() => handleOpenDialog()} />
 			</Box>
+
+			<UserTable
+				users={users}
+				onEdit={handleOpenDialog}
+				onDelete={handleDeleteUser}
+			/>
 
 			<UserForm
 				open={openDialog}
@@ -127,7 +118,7 @@ function UserManagement() {
 					{snackbar.message}
 				</Alert>
 			</Snackbar>
-		</Container>
+		</Box>
 	);
 }
 

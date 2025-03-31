@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Container, Typography } from '@mui/material';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import React, { useState, useEffect } from 'react';
+import { AppBar, Box, Typography } from '@mui/material';
+
 import exercisesData from '../constants/exercises.json';
 
 import ExerciseDetail from './ExerciseDetail';
@@ -11,12 +11,12 @@ import ExerciseList from './ExerciseList';
 const ExerciseApp = () => {
 	const [exercises, setExercises] = useState(exercisesData?.exercises);
 	const [filters, setFilters] = useState({
-		muscle: '',
-		equipment: '',
-		category: '',
-		force: '',
-		difficulty: '',
 		searchQuery: '',
+		muscle: 'All',
+		equipment: 'All',
+		category: 'All',
+		force: 'All',
+		difficulty: 'All',
 	});
 
 	const [selectedExercise, setSelectedExercise] = useState(null);
@@ -42,17 +42,16 @@ const ExerciseApp = () => {
 
 	const clearFilters = () => {
 		setFilters({
-			muscle: '',
-			equipment: '',
-			category: '',
-			force: '',
-			difficulty: '',
 			searchQuery: '',
+			muscle: 'All',
+			equipment: 'All',
+			category: 'All',
+			force: 'All',
+			difficulty: 'All',
 		});
 	};
 
-	// Apply filters
-	useEffect(() => {
+	const applyFilters = () => {
 		let filteredExercises = [...exercisesData?.exercises];
 
 		// Filter by muscle
@@ -98,7 +97,7 @@ const ExerciseApp = () => {
 		}
 
 		setExercises(filteredExercises);
-	}, [filters]);
+	};
 
 	// Open exercise details
 	const openExerciseDetails = (exercise) => {
@@ -123,14 +122,8 @@ const ExerciseApp = () => {
 	};
 
 	return (
-		<Container maxWidth='lg' sx={{ py: 4 }}>
-			<Typography
-				variant='h3'
-				component='h1'
-				gutterBottom
-				sx={{ display: 'flex', alignItems: 'center' }}
-			>
-				<FitnessCenterIcon sx={{ mr: 2, fontSize: 40 }} />
+		<Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
+			<Typography component='h2' variant='h6' sx={{ mb: 2 }}>
 				Gym Exercise Library
 			</Typography>
 
@@ -138,7 +131,22 @@ const ExerciseApp = () => {
 				filters={filters}
 				handleSearch={handleSearch}
 				handleFilterChange={handleFilterChange}
+				applyFilters={applyFilters}
+				clearFilters={clearFilters}
 			/>
+
+			<Box sx={{ flexGrow: 1, my: 3 }}>
+				<AppBar position='static'>
+					<Typography
+						variant='h6'
+						noWrap
+						component='div'
+						sx={{ flexGrow: 1, marginLeft: 3 }}
+					>
+						Result count: {exercises.length}
+					</Typography>
+				</AppBar>
+			</Box>
 
 			<ExerciseList
 				exercises={exercises}
@@ -154,7 +162,7 @@ const ExerciseApp = () => {
 				handleNext={handleNext}
 				handleBack={handleBack}
 			/>
-		</Container>
+		</Box>
 	);
 };
 

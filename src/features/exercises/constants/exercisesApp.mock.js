@@ -231,7 +231,7 @@ export const categoryTypes = [
 		value: 'powerlifting',
 	},
 	{
-		label: 'cardio',
+		label: 'Cardio',
 		value: 'cardio',
 	},
 	{
