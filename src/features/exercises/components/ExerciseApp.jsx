@@ -103,7 +103,7 @@ const ExerciseApp = () => {
 			);
 		}
 
-		setExercises(filteredExercises);
+		setExercises([...filteredExercises]);
 	}, [filters]);
 
 	// Open exercise details

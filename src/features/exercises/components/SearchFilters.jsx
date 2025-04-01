@@ -155,7 +155,7 @@ function SearchFilters(props) {
 							Search
 						</Button>
 						<Button variant='outlined' onClick={clearFilters}>
-							Clear Filters
+							Clear
 						</Button>
 					</Stack>
 				</Grid>
