@@ -5,16 +5,26 @@ import {
 	Chip,
 	Button,
 	Drawer,
-	Tooltip,
 	IconButton,
 	AppBar,
 	Toolbar,
 	Divider,
 	MobileStepper,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+	<Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+		maxWidth: 220,
+		fontSize: theme.typography.pxToRem(12),
+	},
+}));
 
 function ExerciseDetail(props) {
 	const {
@@ -104,16 +114,26 @@ function ExerciseDetail(props) {
 
 					<Box sx={{ p: 3 }}>
 						<Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-							<Tooltip
-								title={`Muscle Groups involved: ${selectedExercise.primaryMuscles.join(
-									','
-								)}`}
+							<HtmlTooltip
+								title={
+									<React.Fragment>
+										<Typography color='inherit'>
+											Muscle Groups involved
+										</Typography>
+										<b>{'Primary: '}</b>
+										<em>{selectedExercise.primaryMuscles.join(',')}</em>
+										<br />
+										<b>{'Secondary: '}</b>
+										<em>{selectedExercise.secondaryMuscles.join(',')}</em>
+									</React.Fragment>
+								}
 							>
 								<Chip
 									label={selectedExercise.primaryMuscles[0]}
 									color='primary'
+									size='small'
 								/>
-							</Tooltip>
+							</HtmlTooltip>
 							<Tooltip title='Equipment used'>
 								<Chip
 									label={selectedExercise.equipment || '-'}
