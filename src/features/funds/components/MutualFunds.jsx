@@ -20,6 +20,7 @@ function MutualFunds() {
 	}, [dispatch]);
 
 	const handleChange = (event, newValue) => {
+		console.log(newValue);
 		setSelectedFund(newValue);
 	};
 

@@ -1,7 +1,8 @@
 export const MOCK_FUNDS = [
 	{
 		id: 1,
-		name: 'Parag Parikh Flexi Cap Fund Direct-Growth',
+		schemeCode: 122639,
+		schemeName: 'Parag Parikh Flexi Cap Fund - Direct Plan - Growth',
 		initialInvestment: 340000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 10300 },
@@ -14,7 +15,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 2,
-		name: 'Axis Long Term Equity Direct Plan-Growth',
+		schemeCode: 120503,
+		schemeName: 'Axis ELSS Tax Saver Fund - Direct Plan - Growth Option',
 		initialInvestment: 400000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 5200 },
@@ -27,7 +29,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 3,
-		name: 'Mirae Asset Tax Saver Fund Direct-Growth',
+		schemeCode: 135781,
+		schemeName: 'Mirae Asset ELSS Tax Saver Fund - Direct Plan - Growth',
 		initialInvestment: 146000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 8060 },
@@ -40,7 +43,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 4,
-		name: 'Axis Bluechip Fund Direct Plan-Growth',
+		schemeCode: 120465,
+		schemeName: 'Axis Bluechip Fund - Direct Plan - Growth',
 		initialInvestment: 126000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -53,7 +57,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 5,
-		name: 'Invesco India Contra Fund Direct - Growth',
+		schemeCode: 120348,
+		schemeName: 'Invesco India Contra Fund - Direct Plan - Growth',
 		initialInvestment: 40000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -66,7 +71,9 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 6,
-		name: 'Canara Robeco Bluechip Equity Fund Direct-Growth',
+		schemeCode: 118269,
+		schemeName:
+			'CANARA ROBECO BLUE CHIP EQUITY FUND - DIRECT PLAN - GROWTH OPTION',
 		initialInvestment: 70000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -79,7 +86,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 7,
-		name: 'Quant Tax Plan Direct-Growth',
+		schemeCode: 120847,
+		schemeName: 'Quant ELSS Tax Saver Fund - Growth Option - Direct Plan',
 		initialInvestment: 64000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -92,7 +100,9 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 8,
-		name: 'PGIM India Midcap Opportunities Fund Direct-Growth',
+		schemeCode: 125307,
+		schemeName:
+			'PGIM India Midcap Opportunities Fund - Direct Plan - Growth Option',
 		initialInvestment: 70000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -105,7 +115,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 9,
-		name: 'Axis Small Cap Fund Direct-Growth',
+		schemeCode: 125354,
+		schemeName: 'Axis Small Cap Fund - Direct Plan - Growth',
 		initialInvestment: 40000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -118,7 +129,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 10,
-		name: 'Mirae Asset Emerging Bluechip Fund Direct-Growth',
+		schemeCode: 118834,
+		schemeName: 'Mirae Asset Large & Midcap Fund - Direct Plan - Growth',
 		initialInvestment: 15000,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -132,7 +144,9 @@ export const MOCK_FUNDS = [
 	// SIPs
 	{
 		id: 11,
-		name: 'Canara Robeco Conservative Hybrid Fund Direct-Growth',
+		schemeCode: 118309,
+		schemeName:
+			'CANARA ROBECO CONSERVATIVE HYBRID FUND - DIRECT PLAN - GROWTH OPTION',
 		initialInvestment: 179991,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -145,7 +159,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 12,
-		name: 'Edelweiss Mid Cap Direct Plan Growth',
+		schemeCode: 140228,
+		schemeName: 'Edelweiss Mid Cap Fund - Direct Plan - Growth Option',
 		initialInvestment: 179991,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -158,7 +173,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 13,
-		name: 'Kotak Equity Opportunities Fund Direct Growth',
+		schemeCode: 120158,
+		schemeName: 'Kotak Equity Opportunities Fund - Direct- Growth',
 		initialInvestment: 179991,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },
@@ -171,7 +187,8 @@ export const MOCK_FUNDS = [
 	},
 	{
 		id: 14,
-		name: 'SBI Small Cap Fund Direct Growth',
+		schemeCode: 125497,
+		schemeName: 'SBI Small Cap Fund - Direct Plan - Growth',
 		initialInvestment: 179991,
 		monthlyReturns: [
 			// { month: 'Jan', value: 7425 },

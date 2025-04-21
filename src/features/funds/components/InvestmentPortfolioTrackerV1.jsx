@@ -59,7 +59,7 @@ export default function InvestmentPortfolioTrackerV1() {
 	const toggleFundVisibility = (dataKey) => {
 		setFunds((prevFunds) =>
 			prevFunds.map((fund) =>
-				fund.name === dataKey ? { ...fund, visible: !fund.visible } : fund
+				fund.schemeName === dataKey ? { ...fund, visible: !fund.visible } : fund
 			)
 		);
 	};
@@ -72,7 +72,7 @@ export default function InvestmentPortfolioTrackerV1() {
 			const monthReturn = fund.monthlyReturns.find(
 				(m) => m.month === monthData.month
 			);
-			obj[fund.name] = monthReturn ? monthReturn.value : 0;
+			obj[fund.schemeName] = monthReturn ? monthReturn.value : 0;
 		});
 
 		return obj;
@@ -135,7 +135,7 @@ export default function InvestmentPortfolioTrackerV1() {
 				}}
 			>
 				{payload.map((entry, index) => {
-					const fund = funds.find((f) => f.name === entry.value);
+					const fund = funds.find((f) => f.schemeName === entry.value);
 					const isActive = fund ? fund.visible : true;
 
 					return (
@@ -284,7 +284,7 @@ export default function InvestmentPortfolioTrackerV1() {
 								.map((fund, index) => (
 									<Bar
 										key={fund.id}
-										dataKey={fund.name}
+										dataKey={fund.schemeName}
 										fill={colors[index % colors.length]}
 									/>
 								))}
@@ -302,7 +302,7 @@ export default function InvestmentPortfolioTrackerV1() {
 					<Table aria-label='fund details table'>
 						<TableHead>
 							<TableRow>
-								<TableCell>Fund Name</TableCell>
+								<TableCell>Scheme Name</TableCell>
 								<TableCell align='right'>Initial Investment</TableCell>
 								<TableCell align='right'>Current Value</TableCell>
 								<TableCell align='right'>Return Value</TableCell>
@@ -332,7 +332,7 @@ export default function InvestmentPortfolioTrackerV1() {
 										}}
 									>
 										<TableCell component='th' scope='row'>
-											{fund.name}
+											{fund.schemeName}
 										</TableCell>
 										<TableCell align='right'>
 											{formatCurrency(fund.initialInvestment)}
