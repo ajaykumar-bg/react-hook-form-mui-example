@@ -1,13 +1,13 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import WorkIcon from '@mui/icons-material/Work';
 
 function MutualFundList(props) {
-	const { funds, handleSelect } = props;
+	const { funds, handleSelect, selectedMutualFund } = props;
 
 	return (
 		<List
@@ -20,7 +20,8 @@ function MutualFundList(props) {
 			}}
 		>
 			{funds.map((fund) => (
-				<ListItem
+				<ListItemButton
+					selected={selectedMutualFund?.schemeCode === fund.schemeCode}
 					sx={{ cursor: 'pointer' }}
 					key={fund.schemeCode}
 					onClick={() => handleSelect(fund)}
@@ -31,7 +32,7 @@ function MutualFundList(props) {
 						</Avatar>
 					</ListItemAvatar>
 					<ListItemText primary={fund.schemeName} secondary={fund.schemeCode} />
-				</ListItem>
+				</ListItemButton>
 			))}
 		</List>
 	);
