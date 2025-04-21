@@ -1,55 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import React, { useEffect } from 'react';
+import { Grid, Box, Typography } from '@mui/material';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-	fetchMutualFundsRequest,
+	// fetchMutualFundsRequest,
+	fetchMutualFundRequest,
 	selectMutualFunds,
+	selectMutualFundForEdit,
+	selectSelectedMutualFund,
 } from '../redux/mutualFundsSlice';
+import MutualFundList from './MutualFundList';
+import SelectedFundDetails from './SelectedFundDetails';
 
 function MutualFunds() {
-	const [selectedFund, setSelectedFund] = useState();
 	const dispatch = useDispatch();
 	const mutualFunds = useSelector(selectMutualFunds);
 
+	const selectedMutualFund = useSelector(selectSelectedMutualFund);
+	console.log('selectedMutualFund', selectedMutualFund);
+
 	useEffect(() => {
-		dispatch(fetchMutualFundsRequest());
+		// dispatch(fetchMutualFundsRequest());
 	}, [dispatch]);
 
-	const handleChange = (event, newValue) => {
-		console.log(newValue);
-		setSelectedFund(newValue);
+	const handleFundSelect = (fund) => {
+		dispatch(selectMutualFundForEdit(fund));
+		dispatch(fetchMutualFundRequest(fund.schemeCode));
 	};
 
 	return (
-		<Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
+		<Box
+			sx={{
+				width: '100%',
+				maxWidth: { sm: '100%', md: '1700px' },
+			}}
+		>
 			<Typography component='h2' variant='h6' sx={{ mb: 2 }}>
 				Mutual Funds
 			</Typography>
 			<Typography variant='subtitle2' gutterBottom>
-				Search and find a mutual Fund
+				Click on a mutual Fund to see details
 			</Typography>
-			<Box>
-				<Autocomplete
-					value={selectedFund}
-					onChange={handleChange}
-					options={mutualFunds}
-					getOptionLabel={(option) => option.schemeName}
-					getOptionKey={(option) => option.schemeCode}
-					sx={{ width: 'auto' }}
-					renderInput={(params) => (
-						<TextField {...params} label='Mutual Funds' />
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={4} md={4}>
+					<MutualFundList
+						funds={mutualFunds}
+						selectedMutualFund={selectedMutualFund}
+						handleSelect={handleFundSelect}
+					/>
+				</Grid>
+				<Grid item xs={12} sm={8} md={8}>
+					{selectedMutualFund && (
+						<SelectedFundDetails fund={selectedMutualFund} />
 					)}
-					renderOption={(props, option) => (
-						<li {...props} key={option.schemeCode}>
-							{option.schemeName}
-						</li>
-					)}
-				/>
-			</Box>
+				</Grid>
+			</Grid>
 		</Box>
 	);
 }

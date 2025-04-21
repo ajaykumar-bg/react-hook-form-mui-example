@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { MUTUAL_FUNDS } from '../data/mutualFunds';
 
 const initialState = {
-	mutualFunds: [],
+	mutualFunds: MUTUAL_FUNDS,
 	loading: false,
 	error: null,
 	selectedMutualFund: null,
@@ -31,7 +32,12 @@ export const mutualFundsSlice = createSlice({
 			state.error = null;
 		},
 		fetchMutualFundSuccess: (state, action) => {
-			state.selectedMutualFund = action.payload;
+			const { meta, data } = action.payload;
+			state.selectedMutualFund = {
+				schemeCode: meta.scheme_code,
+				schemeName: meta.scheme_name,
+				data: data.reverse(),
+			};
 			state.loading = false;
 		},
 		fetchMutualFundFailure: (state, action) => {

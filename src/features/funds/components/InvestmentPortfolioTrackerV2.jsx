@@ -28,7 +28,6 @@ import {
 	ResponsiveContainer,
 } from 'recharts';
 import { MOCK_FUNDS_V2 } from '../data/mockFunds';
-import MutualFunds from './MutualFunds';
 
 // Styled components using MUI's styled API
 const SummaryCard = styled(Card)(({ theme, colortype }) => ({
