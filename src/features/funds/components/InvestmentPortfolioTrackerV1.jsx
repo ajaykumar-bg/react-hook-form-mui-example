@@ -51,7 +51,7 @@ const SummaryCard = styled(Card)(({ theme, colortype }) => ({
 	},
 }));
 
-export default function InvestmentPortfolioTracker() {
+export default function InvestmentPortfolioTrackerV1() {
 	// Sample data - replace with your actual investment data
 	const [funds, setFunds] = useState(MOCK_FUNDS_V1);
 
