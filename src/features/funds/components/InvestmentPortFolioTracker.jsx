@@ -27,7 +27,7 @@ import {
 	Legend,
 	ResponsiveContainer,
 } from 'recharts';
-import { MOCK_FUNDS_V1 } from '../data/mockFunds';
+import { MOCK_FUNDS_V2 } from '../data/mockFunds';
 
 // Styled components using MUI's styled API
 const SummaryCard = styled(Card)(({ theme, colortype }) => ({
@@ -53,13 +53,13 @@ const SummaryCard = styled(Card)(({ theme, colortype }) => ({
 
 export default function InvestmentPortfolioTracker() {
 	// Sample data - replace with your actual investment data
-	const [funds, setFunds] = useState(MOCK_FUNDS_V1);
+	const [funds, setFunds] = useState(MOCK_FUNDS_V2);
 
 	// Toggle fund visibility
-	const toggleFundVisibility = (dataKey) => {
+	const toggleFundActivity = (dataKey) => {
 		setFunds((prevFunds) =>
 			prevFunds.map((fund) =>
-				fund.name === dataKey ? { ...fund, visible: !fund.visible } : fund
+				fund.name === dataKey ? { ...fund, active: !fund.active } : fund
 			)
 		);
 	};
@@ -119,7 +119,7 @@ export default function InvestmentPortfolioTracker() {
 		return `Rs. ${value.toLocaleString()}`;
 	};
 
-	// Custom Legend component for toggling visibility
+	// Custom Legend component for toggling visibility with opacity
 	const CustomizedLegend = (props) => {
 		const { payload } = props;
 
@@ -136,7 +136,7 @@ export default function InvestmentPortfolioTracker() {
 			>
 				{payload.map((entry, index) => {
 					const fund = funds.find((f) => f.name === entry.value);
-					const isActive = fund ? fund.visible : true;
+					const isActive = fund ? fund.active : true;
 
 					return (
 						<li
@@ -146,16 +146,18 @@ export default function InvestmentPortfolioTracker() {
 								display: 'flex',
 								alignItems: 'center',
 								cursor: 'pointer',
-								opacity: isActive ? 1 : 0.5,
+								opacity: isActive ? 1 : 0.3,
+								transition: 'opacity 0.3s ease',
 							}}
-							onClick={() => toggleFundVisibility(entry.value)}
+							onClick={() => toggleFundActivity(entry.value)}
 						>
 							<div
 								style={{
-									width: 10,
-									height: 10,
+									width: 12,
+									height: 12,
 									backgroundColor: entry.color,
-									marginRight: 5,
+									marginRight: 6,
+									borderRadius: '2px',
 								}}
 							/>
 							<span>{entry.value}</span>
@@ -269,7 +271,7 @@ export default function InvestmentPortfolioTracker() {
 					Individual Fund Performance
 				</Typography>
 				<Typography variant='body2' color='text.secondary' sx={{ mb: 2 }}>
-					Click on the legend items below to toggle fund visibility
+					Click on the legend items below to highlight or dim specific funds
 				</Typography>
 				<Box sx={{ height: 700 }}>
 					<ResponsiveContainer width='100%' height='100%'>
@@ -279,15 +281,15 @@ export default function InvestmentPortfolioTracker() {
 							<YAxis />
 							<Tooltip formatter={(value) => [formatCurrency(value)]} />
 							<Legend content={<CustomizedLegend />} />
-							{funds
-								.filter((fund) => fund.visible)
-								.map((fund, index) => (
-									<Bar
-										key={fund.id}
-										dataKey={fund.name}
-										fill={colors[index % colors.length]}
-									/>
-								))}
+							{funds.map((fund, index) => (
+								<Bar
+									key={fund.id}
+									dataKey={fund.name}
+									fill={colors[index % colors.length]}
+									fillOpacity={fund.active ? 1 : 0.3}
+									strokeOpacity={fund.active ? 1 : 0.3}
+								/>
+							))}
 						</BarChart>
 					</ResponsiveContainer>
 				</Box>
@@ -310,7 +312,7 @@ export default function InvestmentPortfolioTracker() {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{funds.map((fund) => {
+							{funds.map((fund, index) => {
 								const currentValue =
 									fund.monthlyReturns[fund.monthlyReturns.length - 1].value;
 								const returnValue = currentValue - fund.initialInvestment;
@@ -325,13 +327,33 @@ export default function InvestmentPortfolioTracker() {
 									<TableRow
 										key={fund.id}
 										sx={{
-											opacity: fund.visible ? 1 : 0.5,
-											backgroundColor: fund.visible
-												? 'inherit'
-												: 'rgba(0, 0, 0, 0.04)',
+											opacity: fund.active ? 1 : 0.5,
+											transition: 'opacity 0.3s ease',
+											backgroundColor: 'inherit',
+											'&:hover': {
+												backgroundColor: 'rgba(0, 0, 0, 0.04)',
+											},
+											cursor: 'pointer',
 										}}
+										onClick={() => toggleFundActivity(fund.name)}
 									>
-										<TableCell component='th' scope='row'>
+										<TableCell
+											component='th'
+											scope='row'
+											sx={{
+												display: 'flex',
+												alignItems: 'center',
+											}}
+										>
+											<div
+												style={{
+													width: 12,
+													height: 12,
+													backgroundColor: colors[index % colors.length],
+													marginRight: 8,
+													borderRadius: '2px',
+												}}
+											/>
 											{fund.name}
 										</TableCell>
 										<TableCell align='right'>

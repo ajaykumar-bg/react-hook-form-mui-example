@@ -25,6 +25,11 @@ const mainListItems = [
 	{ text: 'Exercises', icon: <FitnessCenterIcon />, path: '/exercises' },
 	{ text: 'Charts', icon: <ShowChartIcon />, path: '/charts' },
 	{ text: 'Mutual Fund', icon: <ShowChartIcon />, path: '/mutual-funds' },
+	{
+		text: 'Investment Portfolio Tracker',
+		icon: <ShowChartIcon />,
+		path: '/investment-portfolio-tracker',
+	},
 	// { text: 'Tasks', icon: <AssignmentRoundedIcon /> },
 ];
 
