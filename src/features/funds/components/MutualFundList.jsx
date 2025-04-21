@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import WorkIcon from '@mui/icons-material/Work';
 
 function MutualFundList(props) {
-	const { funds, selectedMutualFund, handleSelect } = props;
+	const { funds, handleSelect } = props;
 
 	return (
 		<List
@@ -15,10 +15,16 @@ function MutualFundList(props) {
 				width: '100%',
 				maxWidth: 360,
 				bgcolor: 'background.paper',
+				maxHeight: 900,
+				overflow: 'auto',
 			}}
 		>
 			{funds.map((fund) => (
-				<ListItem key={fund.schemeCode} onClick={() => handleSelect(fund)}>
+				<ListItem
+					sx={{ cursor: 'pointer' }}
+					key={fund.schemeCode}
+					onClick={() => handleSelect(fund)}
+				>
 					<ListItemAvatar>
 						<Avatar>
 							<WorkIcon />
