@@ -15,7 +15,7 @@ function MutualFundList(props) {
 				width: '100%',
 				maxWidth: 360,
 				bgcolor: 'background.paper',
-				maxHeight: 900,
+				maxHeight: 800,
 				overflow: 'auto',
 			}}
 		>

@@ -9,6 +9,7 @@ import {
 	Typography,
 	Divider,
 } from '@mui/material';
+import { ResponsiveContainer } from 'recharts';
 import { orange, red, green } from '@mui/material/colors';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
@@ -23,7 +24,7 @@ function SelectedFundDetails(props) {
 	return (
 		<Card
 			sx={{
-				height: 900,
+				height: 800,
 				display: 'flex',
 				flexDirection: 'column',
 				transition: 'transform 0.2s, box-shadow 0.2s',
@@ -63,18 +64,20 @@ function SelectedFundDetails(props) {
 				)}
 
 				<Box sx={{ width: '100%', height: 700 }}>
-					<SparkLineChart
-						data={yAxisData}
-						area
-						showHighlight
-						showTooltip
-						xAxis={{
-							scaleType: 'band',
-							data: xAxisData, // Use the correct property 'data' for xAxis
-						}}
-					>
-						{/* <AreaGradient color={chartColor} id={`area-gradient-${value}`} /> */}
-					</SparkLineChart>
+					<ResponsiveContainer width='100%' height='100%'>
+						<SparkLineChart
+							data={yAxisData}
+							area
+							showHighlight
+							showTooltip
+							xAxis={{
+								scaleType: 'band',
+								data: xAxisData, // Use the correct property 'data' for xAxis
+							}}
+						>
+							{/* <AreaGradient color={chartColor} id={`area-gradient-${value}`} /> */}
+						</SparkLineChart>
+					</ResponsiveContainer>
 				</Box>
 			</CardContent>
 		</Card>
