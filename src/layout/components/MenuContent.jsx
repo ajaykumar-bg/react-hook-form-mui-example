@@ -24,6 +24,7 @@ const mainListItems = [
 	{ text: 'Users', icon: <PeopleRoundedIcon />, path: '/users' },
 	{ text: 'Exercises', icon: <FitnessCenterIcon />, path: '/exercises' },
 	{ text: 'Charts', icon: <ShowChartIcon />, path: '/charts' },
+	{ text: 'Mutual Funds', icon: <ShowChartIcon />, path: '/mutual-funds' },
 	{
 		text: 'Investment Portfolio Tracker - V1',
 		icon: <ShowChartIcon />,

@@ -19,6 +19,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Profile from './components/Profile';
 import Account from './components/Account';
+import MutualFunds from './features/funds/components/MutualFunds';
 import InvestmentPortfolioTrackerV1 from './features/funds/components/InvestmentPortfolioTrackerV1';
 import InvestmentPortfolioTrackerV2 from './features/funds/components/InvestmentPortfolioTrackerV2';
 
@@ -45,6 +46,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<DashboardCharts />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/mutual-funds'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<MutualFunds />
 								</AppLayout>
 							</ProtectedRoute>
 						}
