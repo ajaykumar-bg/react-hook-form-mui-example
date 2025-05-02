@@ -21,7 +21,9 @@
 		"@testing-library/react": "^16.2.0",
 		"@testing-library/user-event": "^13.5.0",
 		"axios": "^1.8.1",
+		"cors": "^2.8.5",
 		"dayjs": "1.11.13",
+		"express": "^5.1.0",
 		"fetch-mock": "^12.5.1",
 		"i18next": "19.6.3",
 		"json-server": "0.17.4",
@@ -70,5 +72,6 @@
 		"axios-mock-adapter": "^1.21.4",
 		"jest": "^29.7.0",
 		"jest-fetch-mock": "^3.0.3"
-	}
+	},
+	"proxy": "http://localhost:5000"
 }

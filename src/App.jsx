@@ -22,6 +22,7 @@ import Account from './components/Account';
 import MutualFunds from './features/funds/components/MutualFunds';
 import InvestmentPortfolioTrackerV1 from './features/funds/components/InvestmentPortfolioTrackerV1';
 import InvestmentPortfolioTrackerV2 from './features/funds/components/InvestmentPortfolioTrackerV2';
+import CreateScoreApp from './features/cricket-live-score/components/CreateScoreApp';
 
 const App = () => {
 	return (
@@ -46,6 +47,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<DashboardCharts />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/cricket-live-score'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<CreateScoreApp />
 								</AppLayout>
 							</ProtectedRoute>
 						}
