@@ -24,7 +24,22 @@ const mainListItems = [
 	{ text: 'Users', icon: <PeopleRoundedIcon />, path: '/users' },
 	{ text: 'Exercises', icon: <FitnessCenterIcon />, path: '/exercises' },
 	{ text: 'Charts', icon: <ShowChartIcon />, path: '/charts' },
-	{ text: 'Mutual Fund', icon: <ShowChartIcon />, path: '/mutual-funds' },
+	{
+		text: 'Cricket Live scores',
+		icon: <ShowChartIcon />,
+		path: '/cricket-live-score',
+	},
+	{ text: 'Mutual Funds', icon: <ShowChartIcon />, path: '/mutual-funds' },
+	{
+		text: 'Investment Portfolio Tracker - V1',
+		icon: <ShowChartIcon />,
+		path: '/investment-portfolio-tracker-v1',
+	},
+	{
+		text: 'Investment Portfolio Tracker - V2',
+		icon: <ShowChartIcon />,
+		path: '/investment-portfolio-tracker-v2',
+	},
 	// { text: 'Tasks', icon: <AssignmentRoundedIcon /> },
 ];
 

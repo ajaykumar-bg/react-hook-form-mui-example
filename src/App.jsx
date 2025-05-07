@@ -19,7 +19,10 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Profile from './components/Profile';
 import Account from './components/Account';
-import MutualFundGrowthChart from './features/funds/components/MutualFundGrowth';
+import MutualFunds from './features/funds/components/MutualFunds';
+import InvestmentPortfolioTrackerV1 from './features/funds/components/InvestmentPortfolioTrackerV1';
+import InvestmentPortfolioTrackerV2 from './features/funds/components/InvestmentPortfolioTrackerV2';
+import CreateScoreApp from './features/cricket-live-score/components/CreateScoreApp';
 
 const App = () => {
 	return (
@@ -49,11 +52,41 @@ const App = () => {
 						}
 					/>
 					<Route
+						path='/cricket-live-score'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<CreateScoreApp />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
 						path='/mutual-funds'
 						element={
 							<ProtectedRoute>
 								<AppLayout>
-									<MutualFundGrowthChart />
+									<MutualFunds />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/investment-portfolio-tracker-v1'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<InvestmentPortfolioTrackerV1 />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/investment-portfolio-tracker-v2'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<InvestmentPortfolioTrackerV2 />
 								</AppLayout>
 							</ProtectedRoute>
 						}
