@@ -12,6 +12,7 @@ import AppLayout from './layout/AppLayout';
 
 import MainGrid from './layout/components/MainGrid';
 import DashboardCharts from './features/charts/components/DashboardCharts';
+import NotificationTest from './features/notification/components/NotificationTest';
 import UserManagement from './features/users/components/UserManagement';
 import ExerciseApp from './features/exercises/components/ExerciseApp';
 import Settings from './components/Settings';
@@ -23,10 +24,12 @@ import MutualFunds from './features/funds/components/MutualFunds';
 import InvestmentPortfolioTrackerV1 from './features/funds/components/InvestmentPortfolioTrackerV1';
 import InvestmentPortfolioTrackerV2 from './features/funds/components/InvestmentPortfolioTrackerV2';
 import CreateScoreApp from './features/cricket-live-score/components/CreateScoreApp';
+import NotificationContainer from './features/notification/components/NotificationContainer';
 
 const App = () => {
 	return (
 		<Provider store={store}>
+			<NotificationContainer />
 			<Router>
 				<Routes>
 					<Route path='/login' element={<Login />} />
@@ -37,6 +40,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<MainGrid />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/notifications'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<NotificationTest />
 								</AppLayout>
 							</ProtectedRoute>
 						}

@@ -22,6 +22,11 @@ import { getAppRoutes } from '../../constants/route.constants';
 const mainListItems = [
 	{ text: 'Home', icon: <HomeRoundedIcon />, path: '/dashboard' },
 	{ text: 'Users', icon: <PeopleRoundedIcon />, path: '/users' },
+	{
+		text: 'Notifications',
+		icon: <PeopleRoundedIcon />,
+		path: '/notifications',
+	},
 	{ text: 'Exercises', icon: <FitnessCenterIcon />, path: '/exercises' },
 	{ text: 'Charts', icon: <ShowChartIcon />, path: '/charts' },
 	{
