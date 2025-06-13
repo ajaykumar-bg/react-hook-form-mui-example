@@ -44,6 +44,11 @@ const mainListItems = [
 ];
 
 const secondaryListItems = [
+	{
+		text: 'TransferList',
+		icon: <SettingsRoundedIcon />,
+		path: '/transfer-list',
+	},
 	{ text: 'Settings', icon: <SettingsRoundedIcon />, path: '/settings' },
 	{ text: 'About', icon: <InfoRoundedIcon />, path: '/about' },
 	{ text: 'Contact', icon: <HelpRoundedIcon />, path: '/contact' },
