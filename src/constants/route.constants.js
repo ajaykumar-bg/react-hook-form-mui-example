@@ -30,6 +30,10 @@ export const getAppRoutes = () => [
 		path: '/exercises',
 	},
 	{
+		label: <Trans i18nKey='page.transferList' />,
+		path: '/transfer-list',
+	},
+	{
 		label: <Trans i18nKey='page.settings' />,
 		path: '/settings',
 	},

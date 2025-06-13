@@ -15,6 +15,7 @@ import DashboardCharts from './features/charts/components/DashboardCharts';
 import UserManagement from './features/users/components/UserManagement';
 import ExerciseApp from './features/exercises/components/ExerciseApp';
 import Settings from './components/Settings';
+import TransferListDemo from './components/TransferListDemo';
 import About from './components/About';
 import Contact from './components/Contact';
 import Profile from './components/Profile';
@@ -107,6 +108,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<ExerciseApp />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/transfer-list'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<TransferListDemo />
 								</AppLayout>
 							</ProtectedRoute>
 						}
