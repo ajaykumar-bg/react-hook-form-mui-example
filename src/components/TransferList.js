@@ -8,13 +8,53 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 
-function not(a, b) {
-	return a.filter((itemA) => !b.some((itemB) => itemB.value === itemA.value));
-}
+// Optimized utility functions using Sets for O(1) lookup
+const not = (a, b) => {
+	const bSet = new Set(b.map((item) => item.value));
+	return a.filter((item) => !bSet.has(item.value));
+};
 
-function intersection(a, b) {
-	return a.filter((itemA) => b.some((itemB) => itemB.value === itemA.value));
-}
+const intersection = (a, b) => {
+	const bSet = new Set(b.map((item) => item.value));
+	return a.filter((item) => bSet.has(item.value));
+};
+
+// Memoized ListItem component to prevent unnecessary re-renders
+const ListItem = React.memo(({ item, isChecked, onToggle }) => {
+	const labelId = `transfer-list-item-${item.value}-label`;
+
+	return (
+		<ListItemButton key={item.value} role='listitem' onClick={onToggle}>
+			<ListItemIcon>
+				<Checkbox
+					checked={isChecked}
+					tabIndex={-1}
+					disableRipple
+					inputProps={{
+						'aria-labelledby': labelId,
+					}}
+				/>
+			</ListItemIcon>
+			<ListItemText id={labelId} primary={item.label} />
+		</ListItemButton>
+	);
+});
+
+// Memoized CustomList component
+const CustomList = React.memo(({ items, checkedSet, onToggle }) => (
+	<Paper sx={{ width: 200, height: 230, overflow: 'auto' }}>
+		<List dense component='div' role='list'>
+			{items.map((item) => (
+				<ListItem
+					key={item.value}
+					item={item}
+					isChecked={checkedSet.has(item.value)}
+					onToggle={onToggle(item)}
+				/>
+			))}
+		</List>
+	</Paper>
+));
 
 export default function TransferList() {
 	const [checked, setChecked] = React.useState([]);
@@ -31,79 +71,64 @@ export default function TransferList() {
 		{ value: 7, label: 'Completed 4' },
 	]);
 
-	const leftChecked = intersection(checked, left);
-	const rightChecked = intersection(checked, right);
-
-	const handleToggle = (item) => () => {
-		const currentIndex = checked.findIndex(
-			(checkedItem) => checkedItem.value === item.value
-		);
-		const newChecked = [...checked];
-
-		if (currentIndex === -1) {
-			newChecked.push(item);
-		} else {
-			newChecked.splice(currentIndex, 1);
-		}
-
-		setChecked(newChecked);
-	};
-
-	const handleAllRight = () => {
-		setRight(right.concat(left));
-		setLeft([]);
-	};
-
-	const handleCheckedRight = () => {
-		setRight(right.concat(leftChecked));
-		setLeft(not(left, leftChecked));
-		setChecked(not(checked, leftChecked));
-	};
-
-	const handleCheckedLeft = () => {
-		setLeft(left.concat(rightChecked));
-		setRight(not(right, rightChecked));
-		setChecked(not(checked, rightChecked));
-	};
-
-	const handleAllLeft = () => {
-		setLeft(left.concat(right));
-		setRight([]);
-	};
-
-	const isChecked = (item) => {
-		return checked.some((checkedItem) => checkedItem.value === item.value);
-	};
-
-	const customList = (items) => (
-		<Paper sx={{ width: 200, height: 230, overflow: 'auto' }}>
-			<List dense component='div' role='list'>
-				{items.map((item) => {
-					const labelId = `transfer-list-item-${item.value}-label`;
-
-					return (
-						<ListItemButton
-							key={item.value}
-							role='listitem'
-							onClick={handleToggle(item)}
-						>
-							<ListItemIcon>
-								<Checkbox
-									checked={isChecked(item)}
-									tabIndex={-1}
-									disableRipple
-									inputProps={{
-										'aria-labelledby': labelId,
-									}}
-								/>
-							</ListItemIcon>
-							<ListItemText id={labelId} primary={item.label} />
-						</ListItemButton>
-					);
-				})}
-			</List>
-		</Paper>
+	// Memoized sets for O(1) lookup performance
+	const checkedSet = React.useMemo(
+		() => new Set(checked.map((item) => item.value)),
+		[checked]
 	);
+	const leftChecked = React.useMemo(
+		() => intersection(checked, left),
+		[checked, left]
+	);
+	const rightChecked = React.useMemo(
+		() => intersection(checked, right),
+		[checked, right]
+	);
+
+	// Memoized toggle handler to prevent recreation on every render
+	const handleToggle = React.useCallback(
+		(item) => () => {
+			setChecked((prevChecked) => {
+				const currentIndex = prevChecked.findIndex(
+					(checkedItem) => checkedItem.value === item.value
+				);
+
+				if (currentIndex === -1) {
+					return [...prevChecked, item];
+				} else {
+					const newChecked = [...prevChecked];
+					newChecked.splice(currentIndex, 1);
+					return newChecked;
+				}
+			});
+		},
+		[]
+	);
+
+	// Memoized action handlers
+	const handleAllRight = React.useCallback(() => {
+		setRight((prevRight) => [...prevRight, ...left]);
+		setLeft([]);
+		setChecked((prevChecked) => not(prevChecked, left));
+	}, [left]);
+
+	const handleCheckedRight = React.useCallback(() => {
+		setRight((prevRight) => [...prevRight, ...leftChecked]);
+		setLeft((prevLeft) => not(prevLeft, leftChecked));
+		setChecked((prevChecked) => not(prevChecked, leftChecked));
+	}, [leftChecked]);
+
+	const handleCheckedLeft = React.useCallback(() => {
+		setLeft((prevLeft) => [...prevLeft, ...rightChecked]);
+		setRight((prevRight) => not(prevRight, rightChecked));
+		setChecked((prevChecked) => not(prevChecked, rightChecked));
+	}, [rightChecked]);
+
+	const handleAllLeft = React.useCallback(() => {
+		setLeft((prevLeft) => [...prevLeft, ...right]);
+		setRight([]);
+		setChecked((prevChecked) => not(prevChecked, right));
+	}, [right]);
 
 	return (
 		<Grid
@@ -111,7 +136,13 @@ export default function TransferList() {
 			spacing={2}
 			sx={{ justifyContent: 'center', alignItems: 'center' }}
 		>
-			<Grid>{customList(left)}</Grid>
+			<Grid>
+				<CustomList
+					items={left}
+					checkedSet={checkedSet}
+					onToggle={handleToggle}
+				/>
+			</Grid>
 			<Grid>
 				<Grid container direction='column' sx={{ alignItems: 'center' }}>
 					<Button
@@ -156,7 +187,13 @@ export default function TransferList() {
 					</Button>
 				</Grid>
 			</Grid>
-			<Grid>{customList(right)}</Grid>
+			<Grid>
+				<CustomList
+					items={right}
+					checkedSet={checkedSet}
+					onToggle={handleToggle}
+				/>
+			</Grid>
 		</Grid>
 	);
 }
