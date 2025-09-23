@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Tree from 'react-d3-tree';
 
 const myTreeData = [
@@ -68,7 +68,6 @@ function FamilyTree() {
 			<Typography variant='subtitle2' gutterBottom>
 				This is the Family Tree page.
 			</Typography>
-			<Divider />
 			<Box sx={{ my: 3 }}>
 				<Tree data={myTreeData} />
 				{/* <Grid container spacing={2}>
@@ -80,7 +79,6 @@ function FamilyTree() {
 					</Grid>
 				</Grid> */}
 			</Box>
-			<Divider />
 		</Box>
 	);
 }
