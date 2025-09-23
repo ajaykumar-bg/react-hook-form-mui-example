@@ -1,57 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Tree from 'react-d3-tree';
-
-const myTreeData = [
-	{
-		name: 'Vasumathi',
-		attributes: {
-			husband: 'Pachan',
-			job: '',
-			husbandJob: 'Teacher', //Not sure
-		},
-		children: [
-			{
-				name: 'Lalitha',
-				attributes: {
-					husband: 'Thadi',
-					nickname: 'Thadi',
-				},
-				children: [
-					{
-						name: 'Ashokan',
-						attributes: {},
-					},
-					{
-						name: 'Mohanan',
-						attributes: {},
-					},
-					{
-						name: 'Sindhu',
-						attributes: {},
-					},
-				],
-			},
-			{
-				name: 'Subashini',
-				attributes: {
-					husband: 'Thadi',
-					nickname: 'Thadi',
-				},
-				children: [
-					{
-						name: 'Bindhu',
-						attributes: {},
-					},
-					{
-						name: 'Prakash',
-						attributes: {},
-					},
-				],
-			},
-		],
-	},
-];
+import { MOCK_FAMILY_TREE } from '../data/mockFamilyTree';
 
 function FamilyTree() {
 	return (
@@ -70,20 +20,12 @@ function FamilyTree() {
 			</Typography>
 			<Box sx={{ my: 3, height: '500px', width: '100%' }}>
 				<Tree
-					data={myTreeData}
+					data={MOCK_FAMILY_TREE}
 					orientation='vertical'
 					pathFunc='step'
 					translate={{ x: window.innerWidth / 2, y: 50 }}
 					separation={{ siblings: 2, nonSiblings: 2 }}
 				/>
-				{/* <Grid container spacing={2}>
-					<Grid item>
-						<Typography>Update your language here</Typography>
-					</Grid>
-					<Grid item>
-						<LanguageSelector />
-					</Grid>
-				</Grid> */}
 			</Box>
 		</Box>
 	);
