@@ -91,7 +91,9 @@ export const MOCK_FAMILY_TREE = [
 			{
 				name: 'Vilasini',
 				attributes: {
+					job: 'Water Authority',
 					spouse: 'Sathyan',
+					spouseJob: 'Coconut Business',
 				},
 				children: [
 					{
