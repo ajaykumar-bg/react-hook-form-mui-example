@@ -24,6 +24,7 @@ import MutualFunds from './features/funds/components/MutualFunds';
 import InvestmentPortfolioTrackerV1 from './features/funds/components/InvestmentPortfolioTrackerV1';
 import InvestmentPortfolioTrackerV2 from './features/funds/components/InvestmentPortfolioTrackerV2';
 import CreateScoreApp from './features/cricket-live-score/components/CreateScoreApp';
+import FamilyTree from './features/funds/components/FamilyTree';
 
 const App = () => {
 	return (
@@ -88,6 +89,16 @@ const App = () => {
 							<ProtectedRoute>
 								<AppLayout>
 									<InvestmentPortfolioTrackerV2 />
+								</AppLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='/family-tree'
+						element={
+							<ProtectedRoute>
+								<AppLayout>
+									<FamilyTree />
 								</AppLayout>
 							</ProtectedRoute>
 						}

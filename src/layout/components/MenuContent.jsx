@@ -40,6 +40,11 @@ const mainListItems = [
 		icon: <ShowChartIcon />,
 		path: '/investment-portfolio-tracker-v2',
 	},
+	{
+		text: 'Family Tree',
+		icon: <ShowChartIcon />,
+		path: '/family-tree',
+	},
 	// { text: 'Tasks', icon: <AssignmentRoundedIcon /> },
 ];
 
