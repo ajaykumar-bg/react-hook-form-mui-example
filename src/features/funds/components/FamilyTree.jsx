@@ -68,8 +68,14 @@ function FamilyTree() {
 			<Typography variant='subtitle2' gutterBottom>
 				This is the Family Tree page.
 			</Typography>
-			<Box sx={{ my: 3 }}>
-				<Tree data={myTreeData} />
+			<Box sx={{ my: 3, height: '500px', width: '100%' }}>
+				<Tree
+					data={myTreeData}
+					orientation='vertical'
+					pathFunc='step'
+					translate={{ x: window.innerWidth / 2, y: 50 }}
+					separation={{ siblings: 2, nonSiblings: 2 }}
+				/>
 				{/* <Grid container spacing={2}>
 					<Grid item>
 						<Typography>Update your language here</Typography>
