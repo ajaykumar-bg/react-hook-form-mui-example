@@ -9,7 +9,7 @@ function FamilyTree() {
 			sx={{
 				width: '100%',
 				height: '100%',
-				maxWidth: { sm: '100%', md: '1700px' },
+				// maxWidth: { sm: '100%', md: '1700px' },
 			}}
 		>
 			<Typography component='h2' variant='h6' sx={{ mb: 2 }}>

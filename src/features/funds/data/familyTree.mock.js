@@ -21,8 +21,9 @@ export const MOCK_FAMILY_TREE = [
 						},
 						children: [
 							{
-								name: 'Lakshmi',
+								name: 'Arya Asok',
 								attributes: {
+									nickName: 'Lakshmi',
 									spouse: 'Arun',
 								},
 							},
@@ -75,6 +76,7 @@ export const MOCK_FAMILY_TREE = [
 					{
 						name: 'Seema',
 						attributes: {
+							job: 'Teacher',
 							spouse: 'Hari',
 						},
 					},
@@ -127,6 +129,7 @@ export const MOCK_FAMILY_TREE = [
 			{
 				name: 'Bahuleyan',
 				attributes: {
+					job: 'Cycle Mechanic',
 					spouse: 'Girija',
 				},
 				children: [
@@ -139,7 +142,10 @@ export const MOCK_FAMILY_TREE = [
 					{
 						name: 'Ajay',
 						attributes: {
+							nickName: 'Deepu',
+							job: 'Software Engineer',
 							spouse: 'Pranava',
+							spouseNickname: 'Charu',
 						},
 					},
 				],
