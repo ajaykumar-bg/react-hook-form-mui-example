@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Tree from 'react-d3-tree';
-import { MOCK_FAMILY_TREE } from '../data/mockFamilyTree';
+import { MOCK_FAMILY_TREE } from '../data/familyTree.mock';
 
 function FamilyTree() {
 	return (
