@@ -1,4 +1,4 @@
-export const MOCK_FAMILY_TREE = [
+export const BAHULEYAN_FAMILY_TREE = [
 	{
 		name: 'Vasumathi',
 		attributes: {
