@@ -5,6 +5,7 @@ export const BAHULEYAN_FAMILY_TREE = [
 			// job: '',
 			spouse: 'Pachan',
 			spouseJob: 'Teacher', //Not sure
+			mother: 'Bhagavathy',
 		},
 		children: [
 			{
@@ -30,6 +31,10 @@ export const BAHULEYAN_FAMILY_TREE = [
 						],
 					},
 					{
+						name: 'Mohanan',
+						attributes: {},
+					},
+					{
 						name: 'Sindhu',
 						attributes: {
 							spouse: 'Satheesh',
@@ -47,31 +52,11 @@ export const BAHULEYAN_FAMILY_TREE = [
 				],
 			},
 			{
-				name: 'Subashini',
-				attributes: {
-					spouse: 'Thadi',
-					spouseNickname: 'Thadi',
-				},
-				children: [
-					{
-						name: 'Mohanan',
-						attributes: {},
-					},
-					{
-						name: 'Bindhu',
-						attributes: {},
-					},
-					{
-						name: 'Prakash',
-						attributes: {
-							spouse: 'Rajalakshmi',
-						},
-					},
-				],
-			},
-			{
 				name: 'Sulochana',
-				attributes: {},
+				attributes: {
+					spouse: 'Sudharshanan',
+					spouseNickname: 'Appu',
+				},
 				children: [
 					{
 						name: 'Seema',
@@ -94,7 +79,7 @@ export const BAHULEYAN_FAMILY_TREE = [
 				name: 'Vilasini',
 				attributes: {
 					job: 'Water Authority',
-					spouse: 'Sathyan',
+					spouse: 'Sathyanadan',
 					spouseJob: 'Coconut Business',
 				},
 				children: [
@@ -102,6 +87,7 @@ export const BAHULEYAN_FAMILY_TREE = [
 						name: 'Suja',
 						attributes: {
 							spouse: 'Roy',
+							spouseJob: 'Police',
 						},
 					},
 					{
@@ -111,18 +97,22 @@ export const BAHULEYAN_FAMILY_TREE = [
 				],
 			},
 			{
-				name: 'Shobana',
+				name: 'Subashini',
 				attributes: {
-					place: 'Oorottmbalam',
+					spouse: 'Sivadasan',
+					spouseNickname: 'Thadi',
+					spouseJob: 'Driver',
 				},
 				children: [
 					{
-						name: 'Pradeep',
+						name: 'Bindhu',
 						attributes: {},
 					},
 					{
-						name: 'Vishnu',
-						attributes: {},
+						name: 'Prakash',
+						attributes: {
+							spouse: 'Rajalakshmi',
+						},
 					},
 				],
 			},
@@ -147,6 +137,23 @@ export const BAHULEYAN_FAMILY_TREE = [
 							spouse: 'Pranava',
 							spouseNickname: 'Charu',
 						},
+					},
+				],
+			},
+			{
+				name: 'Shobana',
+				attributes: {
+					spouse: 'Shekharan',
+					place: 'Oorottmbalam',
+				},
+				children: [
+					{
+						name: 'Pradeep',
+						attributes: {},
+					},
+					{
+						name: 'Vishnu',
+						attributes: {},
 					},
 				],
 			},
