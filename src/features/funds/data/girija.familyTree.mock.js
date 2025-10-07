@@ -3,7 +3,7 @@ export const GIRIJA_FAMILY_TREE = [
 		name: 'Jagatha',
 		attributes: {
 			// job: '',
-			spouse: 'Gangadharan',
+			spouse: 'Gangadharan Shankaran',
 			spouseJob: 'Agriculture',
 		},
 		children: [

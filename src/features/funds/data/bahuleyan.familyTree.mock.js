@@ -3,7 +3,7 @@ export const BAHULEYAN_FAMILY_TREE = [
 		name: 'Vasumathi',
 		attributes: {
 			// job: '',
-			spouse: 'Pachan',
+			spouse: 'Pachan Shankaran',
 			spouseJob: 'Teacher', //Not sure
 			mother: 'Bhagavathy',
 		},
